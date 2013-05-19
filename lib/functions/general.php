@@ -107,3 +107,14 @@ function be_hide_acf_admin_menu(){
 		echo '<style type="text/css">#toplevel_page_edit-post_type-acf{display:none;}</style>';
 }
 add_action( 'admin_head', 'be_hide_acf_admin_menu' );
+
+/**
+ * Disable Inactive Plugins Nag on Synthesis
+ *
+ */
+function be_disable_inactive_plugins_nag() {
+	$disable = get_option( 'synthesis-plugin-snapshots-disable' );
+	if( ! $disable )
+		update_option( 'synthesis-plugin-snapshots-disable', true );
+} 
+add_action( 'plugins_loaded', 'be_disable_inactive_plugins_nag' );
