@@ -94,3 +94,16 @@ function be_pp( $obj, $label = '' ) {
     </script>
     <?php
 }
+
+/**
+ * Hide ACF menu item from the admin menu
+ */
+ 
+function be_hide_acf_admin_menu(){
+	global $current_user;
+	get_currentuserinfo();
+ 
+	if( !in_array( $current_user->user_login, array( 'billerickson', 'j-atchison' ) )
+		echo '<style type="text/css">#toplevel_page_edit-post_type-acf{display:none;}</style>';
+}
+add_action( 'admin_head', 'be_hide_acf_admin_menu' );
