@@ -18,20 +18,20 @@
  * @link http://codex.wordpress.org/Function_Reference/register_post_type
  */
 
-function be_register_rotator_post_type() {
+function be_register_events_post_type() {
 	$labels = array(
-		'name' => 'Rotator Items',
-		'singular_name' => 'Rotator Item',
+		'name' => 'Events',
+		'singular_name' => 'Event',
 		'add_new' => 'Add New',
-		'add_new_item' => 'Add New Rotator Item',
-		'edit_item' => 'Edit Rotator Item',
-		'new_item' => 'New Rotator Item',
-		'view_item' => 'View Rotator Item',
-		'search_items' => 'Search Rotator Items',
-		'not_found' =>  'No rotator items found',
-		'not_found_in_trash' => 'No rotator items found in trash',
+		'add_new_item' => 'Add New Event',
+		'edit_item' => 'Edit Event',
+		'new_item' => 'New Event',
+		'view_item' => 'View Event',
+		'search_items' => 'Search Events',
+		'not_found' =>  'No Events found',
+		'not_found_in_trash' => 'No Events found in trash',
 		'parent_item_colon' => '',
-		'menu_name' => 'Rotator'
+		'menu_name' => 'Events'
 	);
 	
 	$args = array(
@@ -46,9 +46,9 @@ function be_register_rotator_post_type() {
 		'has_archive' => false, 
 		'hierarchical' => false,
 		'menu_position' => null,
-		'supports' => array('title','thumbnail','excerpt')
+		'supports' => array('title','thumbnail','editor')
 	); 
 
-	register_post_type( 'rotator', $args );
+	register_post_type( 'event', $args );
 }
-add_action( 'init', 'be_register_rotator_post_type' );	
+add_action( 'init', 'be_register_events_post_type' );	

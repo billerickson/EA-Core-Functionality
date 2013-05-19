@@ -34,13 +34,13 @@ function be_register_location_taxonomy() {
 		'menu_name' => 'Location'
 	); 	
 
-	register_taxonomy( 'rotator-location', array('rotator'), 
+	register_taxonomy( 'event-location', array('event'), 
 		array(
 			'hierarchical' => true,
 			'labels' => $labels,
 			'show_ui' => true,
 			'query_var' => true,
-			'rewrite' => array( 'slug' => 'rotator-location' ),
+			'rewrite' => array( 'slug' => 'event-location' ),
 		)
 	);
 }
