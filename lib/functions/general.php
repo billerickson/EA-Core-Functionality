@@ -118,3 +118,14 @@ function be_disable_inactive_plugins_nag() {
 		update_option( 'synthesis-plugin-snapshots-disable', true );
 } 
 add_action( 'plugins_loaded', 'be_disable_inactive_plugins_nag' );
+
+/**
+ * Rename WYSIWYG widget
+ *
+ */
+function be_change_tinymce_widget_title($translation, $text, $domain) {
+    if ($text == 'Black Studio TinyMCE')
+        $translation = 'WYSIWYG Editor';
+    return $translation;
+}
+add_filter('gettext', 'be_change_tinymce_widget_title', 10, 3);
