@@ -19,20 +19,23 @@
 // Plugin Directory 
 define( 'BE_DIR', dirname( __FILE__ ) );
  
+// General
+include_once( BE_DIR . '/lib/functions/general.php' );
+
+// Editor Style Refresh
+include_once( BE_DIR . '/lib/functions/editor-style-refresh.php' );
+
 // Post Types
 //include_once( BE_DIR . '/lib/functions/post-types.php' );
 
 // Taxonomies 
 //include_once( BE_DIR . '/lib/functions/taxonomies.php' );
 
-// Metaboxes
-//include_once( BE_DIR . '/lib/functions/metaboxes.php' );
- 
 // Widgets
 //include_once( BE_DIR . '/lib/widgets/widget-social.php' );
 
-// Editor Style Refresh
-include_once( BE_DIR . '/lib/functions/editor-style-refresh.php' );
+// Image Resize
+//include_once( BE_DIR . '/lib/functions/image-resize.php' );
 
-// General
-include_once( BE_DIR . '/lib/functions/general.php' );
+// Nav Menu Dropdown
+//include_once( BE_DIR . '/lib/functions/nav-menu-dropdown.php' );
