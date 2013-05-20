@@ -20,22 +20,22 @@
 define( 'BE_DIR', dirname( __FILE__ ) );
  
 // General
-include_once( BE_DIR . '/lib/functions/general.php' );
+include_once( BE_DIR . '/inc/general.php' );
 
 // Editor Style Refresh
-include_once( BE_DIR . '/lib/functions/editor-style-refresh.php' );
+include_once( BE_DIR . '/inc/editor-style-refresh.php' );
 
 // Post Types
-//include_once( BE_DIR . '/lib/functions/post-types.php' );
+//include_once( BE_DIR . '/inc/post-types.php' );
 
 // Taxonomies 
-//include_once( BE_DIR . '/lib/functions/taxonomies.php' );
+//include_once( BE_DIR . '/inc/taxonomies.php' );
 
 // Widgets
-//include_once( BE_DIR . '/lib/widgets/widget-social.php' );
+//include_once( BE_DIR . '/inc/widget-social.php' );
 
 // Image Resize
-//include_once( BE_DIR . '/lib/functions/image-resize.php' );
+//include_once( BE_DIR . '/inc/image-resize.php' );
 
 // Nav Menu Dropdown
-//include_once( BE_DIR . '/lib/functions/nav-menu-dropdown.php' );
+//include_once( BE_DIR . '/inc/nav-menu-dropdown.php' );
