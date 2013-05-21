@@ -22,7 +22,7 @@ function ea_register_location_taxonomy() {
 	$labels = array(
 		'name'              => 'Locations',
 		'singular_name'     => 'Location',
-		'search_items'      =>  'Search Locations',
+		'search_items'      => 'Search Locations',
 		'all_items'         => 'All Locations',
 		'parent_item'       => 'Parent Location',
 		'parent_item_colon' => 'Parent Location:',

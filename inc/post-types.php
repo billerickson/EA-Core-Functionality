@@ -28,7 +28,7 @@ function ea_register_events_post_type() {
 		'new_item'           => 'New Event',
 		'view_item'          => 'View Event',
 		'search_items'       => 'Search Events',
-		'not_found'          =>  'No Events found',
+		'not_found'          => 'No Events found',
 		'not_found_in_trash' => 'No Events found in trash',
 		'parent_item_colon'  => '',
 		'menu_name'          => 'Events'
