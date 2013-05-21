@@ -20,14 +20,13 @@ add_filter( 'wpseo_use_page_analysis', '__return_false' );
 
 /**
  * Don't Update Plugin
- * @since 1.0.0
  * 
  * This prevents you being prompted to update if there's a public plugin
  * with the same name.
  *
+ * @since 1.0.0
  * @author Mark Jaquith
  * @link http://markjaquith.wordpress.com/2009/12/14/excluding-your-plugin-or-theme-from-update-checks/
- *
  * @param array $r, request arguments
  * @param string $url, request url
  * @return array request arguments
@@ -45,15 +44,16 @@ add_filter( 'http_request_args', 'ea_core_functionality_hidden', 5, 2 );
 
 /**
  * Pretty Printing
- * 
- * @author Chris Bratlien
  *
- * @param mixed
+ * @since 1.0.0
+ * @author Chris Bratlien
+ * @param mixed $obj
+ * @param string $label
  * @return null
  */
 function ea_pp( $obj, $label = '' ) {  
 
-	$data = json_encode(print_r($obj,true));
+	$data = json_encode( print_r( $obj,true ) );
     ?>
     <style type="text/css">
       #bsdLogger {
@@ -90,31 +90,33 @@ function ea_pp( $obj, $label = '' ) {
         logger.appendChild(pre);      
       };
       window.addEventListener ("DOMContentLoaded", doStuff, false);
- 
     </script>
     <?php
 }
 
 /**
  * Hide ACF menu item from the admin menu
+ *
+ * @since 1.0.0
+ * @global array $current_user
  */
- 
 function ea_hide_acf_admin_menu(){
 	global $current_user;
 	get_currentuserinfo();
  
-	if( !in_array( $current_user->user_login, array( 'billerickson', 'j-atchison' ) ) )
-		echo '<style type="text/css">#toplevel_page_edit-post_type-acf{display:none;}</style>';
+	if ( !in_array( $current_user->user_login, array( 'billerickson', 'j-atchison' ) ) )
+    echo '<style type="text/css">#toplevel_page_edit-post_type-acf{display:none;}</style>';
 }
 add_action( 'admin_head', 'ea_hide_acf_admin_menu' );
 
 /**
  * Disable Inactive Plugins Nag on Synthesis
  *
+ * @since 1.0.0
  */
 function ea_disable_inactive_plugins_nag() {
 	$disable = get_option( 'synthesis-plugin-snapshots-disable' );
-	if( ! $disable )
+	if ( ! $disable )
 		update_option( 'synthesis-plugin-snapshots-disable', true );
 } 
 add_action( 'plugins_loaded', 'ea_disable_inactive_plugins_nag' );
@@ -122,10 +124,15 @@ add_action( 'plugins_loaded', 'ea_disable_inactive_plugins_nag' );
 /**
  * Rename WYSIWYG widget
  *
+ * @since 1.0.0
+ * @param string $translation
+ * @param string $text
+ * @param string $domain
+ * @return string
  */
-function ea_change_tinymce_widget_title($translation, $text, $domain) {
-    if ($text == 'Black Studio TinyMCE')
+function ea_change_tinymce_widget_title( $translation, $text, $domain ) {
+    if ( $text == 'Black Studio TinyMCE' )
         $translation = 'WYSIWYG Editor';
     return $translation;
 }
-add_filter('gettext', 'ea_change_tinymce_widget_title', 10, 3);
+add_filter( 'gettext', 'ea_change_tinymce_widget_title', 10, 3 );

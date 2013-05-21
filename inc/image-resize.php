@@ -1,9 +1,6 @@
 <?php
-
-/*
+/**
  * Resize images dynamically using wp built in functions
- * @author Victor Teixeira
- * @link http://core.trac.wordpress.org/ticket/15311
  *
  * php 5.2+
  *
@@ -15,6 +12,9 @@
  * ?>
  * <img src="<?php echo $image[url]; ?>" width="<?php echo $image[width]; ?>" height="<?php echo $image[height]; ?>" />
  *
+ * @since 1.0.0
+ * @author Victor Teixeira
+ * @link http://core.trac.wordpress.org/ticket/15311
  * @param int $attach_id
  * @param string $img_url
  * @param int $width
@@ -117,12 +117,12 @@ function ea_image_resize( $attach_id = null, $img_url = null, $width, $height, $
 	return $vt_image;
 }
 
-
 /**
  * Returns a dynamically resized image
  *
  * Example: ea_get_post_thumbnail( $post->ID, 90, 90, true );
  *
+ * @since 1.0.0
  * @param int $post_id
  * @param int $width
  * @param int $height
