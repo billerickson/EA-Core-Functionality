@@ -2,7 +2,7 @@
 /**
  * Nav Menu Dropdown
  *
- * @package      BE_Genesis_Child
+ * @package      CoreFunctionality
  * @since        1.0.0
  * @link         https://github.com/billerickson/BE-Genesis-Child
  * @author       Bill Erickson <bill@billerickson.net>
