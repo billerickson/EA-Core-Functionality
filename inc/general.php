@@ -32,7 +32,7 @@ add_filter( 'wpseo_use_page_analysis', '__return_false' );
  * @param string $url, request url
  * @return array request arguments
  */
-function be_core_functionality_hidden( $r, $url ) {
+function ea_core_functionality_hidden( $r, $url ) {
 	if ( 0 !== strpos( $url, 'http://api.wordpress.org/plugins/update-check' ) )
 		return $r; // Not a plugin update request. Bail immediately.
 	$plugins = unserialize( $r['body']['plugins'] );
@@ -41,7 +41,7 @@ function be_core_functionality_hidden( $r, $url ) {
 	$r['body']['plugins'] = serialize( $plugins );
 	return $r;
 }
-add_filter( 'http_request_args', 'be_core_functionality_hidden', 5, 2 );
+add_filter( 'http_request_args', 'ea_core_functionality_hidden', 5, 2 );
 
 /**
  * Pretty Printing
@@ -51,7 +51,7 @@ add_filter( 'http_request_args', 'be_core_functionality_hidden', 5, 2 );
  * @param mixed
  * @return null
  */
-function be_pp( $obj, $label = '' ) {  
+function ea_pp( $obj, $label = '' ) {  
 
 	$data = json_encode(print_r($obj,true));
     ?>
@@ -99,33 +99,33 @@ function be_pp( $obj, $label = '' ) {
  * Hide ACF menu item from the admin menu
  */
  
-function be_hide_acf_admin_menu(){
+function ea_hide_acf_admin_menu(){
 	global $current_user;
 	get_currentuserinfo();
  
 	if( !in_array( $current_user->user_login, array( 'billerickson', 'j-atchison' ) ) )
 		echo '<style type="text/css">#toplevel_page_edit-post_type-acf{display:none;}</style>';
 }
-add_action( 'admin_head', 'be_hide_acf_admin_menu' );
+add_action( 'admin_head', 'ea_hide_acf_admin_menu' );
 
 /**
  * Disable Inactive Plugins Nag on Synthesis
  *
  */
-function be_disable_inactive_plugins_nag() {
+function ea_disable_inactive_plugins_nag() {
 	$disable = get_option( 'synthesis-plugin-snapshots-disable' );
 	if( ! $disable )
 		update_option( 'synthesis-plugin-snapshots-disable', true );
 } 
-add_action( 'plugins_loaded', 'be_disable_inactive_plugins_nag' );
+add_action( 'plugins_loaded', 'ea_disable_inactive_plugins_nag' );
 
 /**
  * Rename WYSIWYG widget
  *
  */
-function be_change_tinymce_widget_title($translation, $text, $domain) {
+function ea_change_tinymce_widget_title($translation, $text, $domain) {
     if ($text == 'Black Studio TinyMCE')
         $translation = 'WYSIWYG Editor';
     return $translation;
 }
-add_filter('gettext', 'be_change_tinymce_widget_title', 10, 3);
+add_filter('gettext', 'ea_change_tinymce_widget_title', 10, 3);

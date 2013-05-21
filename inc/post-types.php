@@ -18,7 +18,7 @@
  * @link http://codex.wordpress.org/Function_Reference/register_post_type
  */
 
-function be_register_events_post_type() {
+function ea_register_events_post_type() {
 	$labels = array(
 		'name' => 'Events',
 		'singular_name' => 'Event',
@@ -51,4 +51,4 @@ function be_register_events_post_type() {
 
 	register_post_type( 'event', $args );
 }
-add_action( 'init', 'be_register_events_post_type' );	
+add_action( 'init', 'ea_register_events_post_type' );	

@@ -19,7 +19,7 @@
  * @link http://codex.wordpress.org/Function_Reference/register_taxonomy
  */
 
-function be_register_location_taxonomy() {
+function ea_register_location_taxonomy() {
 	$labels = array(
 		'name' => 'Locations',
 		'singular_name' => 'Location',
@@ -44,4 +44,4 @@ function be_register_location_taxonomy() {
 		)
 	);
 }
-add_action( 'init', 'be_register_location_taxonomy' );
+add_action( 'init', 'ea_register_location_taxonomy' );
