@@ -1,4 +1,4 @@
-<?php # -*- coding: utf-8 -*-
+<?php
 /**
  * Plugin Name: T5 Fresh Editor Stylesheets
  * Description: Enforces fresh editor stylesheets per version parameter.
@@ -10,8 +10,8 @@
  * License URI: http://www.opensource.org/licenses/mit-license.php
  */
 
-if ( ! function_exists( 't5_fresh_editor_style' ) )
-{
+if ( ! function_exists( 't5_fresh_editor_style' ) ) {
+
     add_filter( 'mce_css', 't5_fresh_editor_style' );
 
     /**
@@ -21,12 +21,10 @@ if ( ! function_exists( 't5_fresh_editor_style' ) )
      * @param  string $css Comma separated stylesheet URIs
      * @return string
      */
-    function t5_fresh_editor_style( $css )
-    {
+    function t5_fresh_editor_style( $css ) {
         global $editor_styles;
 
-        if ( empty ( $css ) or empty ( $editor_styles ) )
-        {
+        if ( empty ( $css ) or empty ( $editor_styles ) ) {
             return $css;
         }
 
@@ -35,15 +33,12 @@ if ( ! function_exists( 't5_fresh_editor_style' ) )
         $style_uri = get_stylesheet_directory_uri();
         $style_dir = get_stylesheet_directory();
 
-        if ( is_child_theme() )
-        {
+        if ( is_child_theme() ) {
             $template_uri = get_template_directory_uri();
             $template_dir = get_template_directory();
 
-            foreach ( $editor_styles as $key => $file )
-            {
-                if ( $file && file_exists( "$template_dir/$file" ) )
-                {
+            foreach ( $editor_styles as $key => $file ) {
+                if ( $file && file_exists( "$template_dir/$file" ) ) {
                     $mce_css[] = add_query_arg(
                         'version',
                         filemtime( "$template_dir/$file" ),
@@ -53,10 +48,8 @@ if ( ! function_exists( 't5_fresh_editor_style' ) )
             }
         }
 
-        foreach ( $editor_styles as $file )
-        {
-            if ( $file && file_exists( "$style_dir/$file" ) )
-            {
+        foreach ( $editor_styles as $file ) {
+            if ( $file && file_exists( "$style_dir/$file" ) ) {
                 $mce_css[] = add_query_arg(
                     'version',
                     filemtime( "$style_dir/$file" ),

@@ -2,7 +2,7 @@
 /**
  * Social Widget
  *
- * @package      Core_Functionality
+ * @package      CoreFunctionality
  * @since        1.0.0
  * @link         https://github.com/billerickson/Core-Functionality
  * @author       Bill Erickson <bill@billerickson.net>

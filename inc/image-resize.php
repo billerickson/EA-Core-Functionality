@@ -1,9 +1,6 @@
 <?php
-
-/*
+/**
  * Resize images dynamically using wp built in functions
- * @author Victor Teixeira
- * @link http://core.trac.wordpress.org/ticket/15311
  *
  * php 5.2+
  *
@@ -11,10 +8,13 @@
  * 
  * <?php 
  * $thumb = get_post_thumbnail_id(); 
- * $image = be_image_resize( $thumb,'' , 140, 110, true );
+ * $image = ea_image_resize( $thumb,'' , 140, 110, true );
  * ?>
  * <img src="<?php echo $image[url]; ?>" width="<?php echo $image[width]; ?>" height="<?php echo $image[height]; ?>" />
  *
+ * @since 1.0.0
+ * @author Victor Teixeira
+ * @link http://core.trac.wordpress.org/ticket/15311
  * @param int $attach_id
  * @param string $img_url
  * @param int $width
@@ -22,7 +22,7 @@
  * @param bool $crop
  * @return array
  */
-function be_image_resize( $attach_id = null, $img_url = null, $width, $height, $crop = false ) {
+function ea_image_resize( $attach_id = null, $img_url = null, $width, $height, $crop = false ) {
 
 	// this is an attachment, so we have the ID
 	if ( $attach_id ) {
@@ -117,20 +117,20 @@ function be_image_resize( $attach_id = null, $img_url = null, $width, $height, $
 	return $vt_image;
 }
 
-
 /**
  * Returns a dynamically resized image
  *
- * Example: be_get_post_thumbnail( $post->ID, 90, 90, true );
+ * Example: ea_get_post_thumbnail( $post->ID, 90, 90, true );
  *
+ * @since 1.0.0
  * @param int $post_id
  * @param int $width
  * @param int $height
  * @param bool $crop
  * @return string $image 
  */
-function be_get_post_thumbnail( $post_id = '', $width = '', $height = '', $crop = false ) {
+function ea_get_post_thumbnail( $post_id = '', $width = '', $height = '', $crop = false ) {
 	$attach_id = get_post_thumbnail_id( $post_id );
-	$image = be_image_resize( $attach_id, null, $width, $height, $crop );
+	$image = ea_image_resize( $attach_id, null, $width, $height, $crop );
 	return '<img src="' . $image['url'] . '" />';
 }
