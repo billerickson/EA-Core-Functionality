@@ -56,7 +56,6 @@ add_action( 'admin_menu', 'ja_remove_dashboard_widgets' );
  * @since 1.0
  */
 function ja_remove_admin_menus(){
-    remove_menu_page( 'link-manager.php'       );    // Links
     // remove_menu_page( 'edit.php'               ); // Posts
     // remove_menu_page( 'upload.php'             ); // Media
     // remove_menu_page( 'edit-comments.php'      ); // Comments
@@ -67,7 +66,7 @@ function ja_remove_admin_menus(){
     // remove_menu_page( 'tools.php'              ); // Tools
     // remove_menu_page( 'options-general.php'    ); // Settings
 }
-add_action( 'admin_menu', 'ja_remove_admin_menus' );
+//add_action( 'admin_menu', 'ja_remove_admin_menus' );
 
 /**
  * Remove admin bar items
@@ -79,4 +78,4 @@ function ja_remove_admin_bar_items() {
     global $wp_admin_bar;
     $wp_admin_bar->remove_menu( 'new-link', 'new-content' );  // Links
 }
-add_action( 'wp_before_admin_bar_render', 'ja_remove_admin_bar_items' );
+//add_action( 'wp_before_admin_bar_render', 'ja_remove_admin_bar_items' );
