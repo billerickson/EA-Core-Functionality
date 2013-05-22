@@ -22,6 +22,9 @@ define( 'BE_DIR', dirname( __FILE__ ) );
 // General
 include_once( BE_DIR . '/inc/general.php' );
 
+// WordPress Cleanup
+include_once( BE_DIR . '/inc/wordpress-cleanup.php' );
+
 // Editor Style Refresh
 include_once( BE_DIR . '/inc/editor-style-refresh.php' );
 
