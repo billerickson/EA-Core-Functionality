@@ -12,6 +12,9 @@
  * @license      http://opensource.org/licenses/gpl-2.0.php GNU Public License
  */
 
+// Disable Post Formats UI
+add_filter( 'enable_post_format_ui', '__return_false' );
+
 /**
  * Remove default WordPress widgets
  * 
