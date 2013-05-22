@@ -17,7 +17,7 @@
  * 
  * @since 1.0
  */
-function ja_remove_default_wp_widgets() {
+function ea_remove_default_wp_widgets() {
     unregister_widget( 'WP_Widget_Pages'           );
     unregister_widget( 'WP_Widget_Calendar'        );
     unregister_widget( 'WP_Widget_Archives'        );
@@ -38,7 +38,7 @@ function ja_remove_default_wp_widgets() {
  *
  * @since 1.0
  */
-function ja_remove_dashboard_widgets() {
+function ea_remove_dashboard_widgets() {
     //remove_meta_box( 'dashboard_right_now',       'dashboard', 'core' ); // Right Now
     //remove_meta_box( 'dashboard_recent_comments', 'dashboard', 'core' ); // Recent Comments
     remove_meta_box( 'dashboard_incoming_links',  'dashboard', 'core' );   // Incoming Links
@@ -55,7 +55,7 @@ add_action( 'admin_menu', 'ja_remove_dashboard_widgets' );
  *
  * @since 1.0
  */
-function ja_remove_admin_menus(){
+function ea_remove_admin_menus(){
     // remove_menu_page( 'edit.php'               ); // Posts
     // remove_menu_page( 'upload.php'             ); // Media
     // remove_menu_page( 'edit-comments.php'      ); // Comments
@@ -74,7 +74,7 @@ function ja_remove_admin_menus(){
  * @since 1.0
  * @global array $wp_admin_bar
  */
-function ja_remove_admin_bar_items() {
+function ea_remove_admin_bar_items() {
     global $wp_admin_bar;
     $wp_admin_bar->remove_menu( 'new-link', 'new-content' );  // Links
 }
