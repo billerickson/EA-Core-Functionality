@@ -31,7 +31,7 @@ function ja_remove_default_wp_widgets() {
     unregister_widget( 'WP_Widget_RSS'             );
     unregister_widget( 'WP_Widget_Tag_Cloud'       );
 }
-add_action( 'widgets_init', 'ja_remove_default_wp_widgets', 1 );
+//add_action( 'widgets_init', 'ja_remove_default_wp_widgets', 1 );
 
 /**
  * Remove extra dashboard widgets
