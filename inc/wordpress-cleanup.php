@@ -13,21 +13,6 @@
  */
 
 /**
- *  Remove user profile fields
- *
- * @since 1.0
- * @param array $contactmethods Contact methods
- * @return array Contact methods
- */
-function ja_remove_contact_methods( $contactmethods ) {
-    unset( $contactmethods['aim']    );
-    unset( $contactmethods['yim']    );
-    unset( $contactmethods['jabber'] );
-    return $contactmethods;
-}
-add_filter( 'user_contactmethods', 'ja_remove_contact_methods' );
-
-/**
  * Remove default WordPress widgets
  * 
  * @since 1.0
