@@ -51,7 +51,7 @@ function ea_remove_dashboard_widgets() {
     remove_meta_box( 'dashboard_primary',         'dashboard', 'core' );   // WordPress Blog
     remove_meta_box( 'dashboard_secondary',       'dashboard', 'core' );   // Other WordPress News
 }
-add_action( 'admin_menu', 'ja_remove_dashboard_widgets' );
+add_action( 'admin_menu', 'ea_remove_dashboard_widgets' );
 
 /**
  * Remove admin menu items
