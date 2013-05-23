@@ -31,7 +31,7 @@ define( 'EA_DIR', dirname( __FILE__ ) );
 include_once( EA_DIR . '/inc/general.php' );
 
 // WordPress Cleanup
-include_once( BE_DIR . '/inc/wordpress-cleanup.php' );
+include_once( EA_DIR . '/inc/wordpress-cleanup.php' );
 
 // Editor Style Refresh
 include_once( EA_DIR . '/inc/editor-style-refresh.php' );
