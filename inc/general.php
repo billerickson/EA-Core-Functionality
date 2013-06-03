@@ -121,6 +121,15 @@ function ea_disable_inactive_plugins_nag() {
 add_action( 'plugins_loaded', 'ea_disable_inactive_plugins_nag' );
 
 /**
+ * Disable Scribe
+ *
+ */
+function ea_disable_scribe() {
+	class Scribe_SEO {}
+}
+add_action( 'plugins_loaded', 'ea_disable_scribe', 4 );
+
+/**
  * Rename WYSIWYG widget
  *
  * @since 1.0.0
