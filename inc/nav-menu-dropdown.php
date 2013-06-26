@@ -37,3 +37,18 @@ class Walker_Nav_Menu_Dropdown extends Walker_Nav_Menu {
 		$output .= "</option>\n"; // replace closing </li> with the option tag
 	}
 }
+
+
+/**
+ * Usage 
+ *
+ *
+function be_mobile_menu() {
+	wp_nav_menu( array(
+		'theme_location' => 'mobile',
+		'depth'          => 1,
+		'walker'         => new Walker_Nav_Menu_Dropdown(),
+		'items_wrap'     => '<div class="mobile-menu"><form><select onchange="if (this.value) window.location.href=this.value"><option value="">Go To&hellip;</option>%3$s</select></form></div>',
+	) );	
+}
+add_action( 'genesis_before_header', 'be_mobile_menu' ); 
