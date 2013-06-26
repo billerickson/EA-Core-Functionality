@@ -40,10 +40,13 @@ class Walker_Nav_Menu_Dropdown extends Walker_Nav_Menu {
 
 
 /**
- * Usage 
+ * Example of Usage
  *
- *
-function be_mobile_menu() {
+ */
+function be_sample_mobile_menu() {
+	if( !class_exists( 'Walker_Nav_Menu_Dropdown' ) )
+		return;
+		
 	wp_nav_menu( array(
 		'theme_location' => 'mobile',
 		'depth'          => 1,
@@ -51,4 +54,4 @@ function be_mobile_menu() {
 		'items_wrap'     => '<div class="mobile-menu"><form><select onchange="if (this.value) window.location.href=this.value"><option value="">Go To&hellip;</option>%3$s</select></form></div>',
 	) );	
 }
-add_action( 'genesis_before_header', 'be_mobile_menu' ); 
+//add_action( 'genesis_before_header', 'be_sample_mobile_menu' ); 
