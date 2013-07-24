@@ -114,9 +114,8 @@ add_action( 'admin_head', 'ea_hide_acf_admin_menu' );
  * @since 1.0.0
  */
 function ea_disable_inactive_plugins_nag() {
-	$disable = get_option( 'synthesis-plugin-snapshots-disable' );
-	if ( ! $disable )
-		update_option( 'synthesis-plugin-snapshots-disable', true );
+	if ( method_exists( 'Synthesis_Software_Monitor', 'inactive_plugin_notifications' ) )
+		remove_action( 'admin_notices', array( 'Synthesis_Software_Monitor', 'inactive_plugin_notifications' ) );
 } 
 add_action( 'plugins_loaded', 'ea_disable_inactive_plugins_nag' );
 
