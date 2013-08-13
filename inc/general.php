@@ -143,3 +143,23 @@ function ea_change_tinymce_widget_title( $translation, $text, $domain ) {
     return $translation;
 }
 add_filter( 'gettext', 'ea_change_tinymce_widget_title', 10, 3 );
+
+/**
+ * Gravity Forms Domain
+ *
+ * Adds a notice at the end of admin email notifications 
+ * specifying the domain from which the email was sent.
+ *
+ * @param array $notification
+ * @param object $form
+ * @param object $entry
+ * @return array $notification
+ */
+function be_gravityforms_domain( $notification, $form, $entry ) {
+
+	if( $notification['name'] == 'Admin Notification' )
+		$notification['message'] .= 'Sent from ' . home_url();
+
+	return $notification;
+}
+add_filter( 'gform_notification', 'be_gravityforms_domain', 10, 3 );
