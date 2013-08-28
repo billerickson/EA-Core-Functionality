@@ -109,26 +109,6 @@ function ea_hide_acf_admin_menu(){
 add_action( 'admin_head', 'ea_hide_acf_admin_menu' );
 
 /**
- * Disable Inactive Plugins Nag on Synthesis
- *
- * @since 1.0.0
- */
-function ea_disable_inactive_plugins_nag() {
-	if ( method_exists( 'Synthesis_Software_Monitor', 'inactive_plugin_notifications' ) )
-		remove_action( 'admin_notices', array( 'Synthesis_Software_Monitor', 'inactive_plugin_notifications' ) );
-} 
-add_action( 'plugins_loaded', 'ea_disable_inactive_plugins_nag' );
-
-/**
- * Disable Scribe
- *
- */
-function ea_disable_scribe() {
-	class Scribe_SEO {}
-}
-add_action( 'plugins_loaded', 'ea_disable_scribe', 4 );
-
-/**
  * Rename WYSIWYG widget
  *
  * @since 1.0.0
