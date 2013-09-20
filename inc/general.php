@@ -143,3 +143,14 @@ function be_gravityforms_domain( $notification, $form, $entry ) {
 	return $notification;
 }
 add_filter( 'gform_notification', 'be_gravityforms_domain', 10, 3 );
+
+
+/**
+ * Disable Registered Users Only 
+ *
+ */
+function be_disable_registered_users_only( $exclusions ) {
+	$exclusions[] = basename($_SERVER['PHP_SELF']);
+	return $exclusions;
+}
+//add_filter( 'registered-users-only_exclusions', 'be_disable_registered_users_only' );
