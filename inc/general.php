@@ -94,6 +94,17 @@ function ea_pp( $obj, $label = '' ) {
 }
 
 /**
+ * Attachment ID on Images
+ *
+ */
+function be_attachment_id_on_images( $attr, $attachment ) {
+	$attr['class'] .= ' attachment-' . $attachment->ID;
+	return $attr;
+}
+add_filter( 'wp_get_attachment_image_attributes', 'be_attachment_id_on_images', 10, 2 );
+
+
+/**
  * Hide ACF menu item from the admin menu
  *
  * @since 1.0.0
