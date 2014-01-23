@@ -98,7 +98,8 @@ function ea_pp( $obj, $label = '' ) {
  *
  */
 function be_attachment_id_on_images( $attr, $attachment ) {
-	$attr['class'] .= ' attachment-' . $attachment->ID;
+	if( !strpos( $attr['class'], 'wp-image-' . $attachment->ID ) )
+		$attr['class'] .= ' wp-image-' . $attachment->ID;
 	return $attr;
 }
 add_filter( 'wp_get_attachment_image_attributes', 'be_attachment_id_on_images', 10, 2 );
