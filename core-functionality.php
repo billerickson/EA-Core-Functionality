@@ -45,8 +45,5 @@ include_once( EA_DIR . '/inc/editor-style-refresh.php' );
 // Widgets
 //include_once( EA_DIR . '/inc/widget-social.php' );
 
-// Image Resize
-//include_once( EA_DIR . '/inc/image-resize.php' );
-
 // Nav Menu Dropdown
 //include_once( EA_DIR . '/inc/nav-menu-dropdown.php' );
