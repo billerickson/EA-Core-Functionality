@@ -30,7 +30,8 @@ class Walker_Nav_Menu_Dropdown extends Walker_Nav_Menu {
 	*/
 	function start_el( &$output, $item, $depth, $args ) {
  		$url = '#' !== $item->url ? $item->url : '';
-		$output .= '<option value="' . $url . '" ' . selected( in_array( 'current-menu-item', $item->classes ), true, false ) . '>' . $item->title; 		
+		$selected = isset( $item->classes ) && is_array( $item->classes ) ? selected( in_array( 'current-menu-item', $item->classes ), true, false ) : '';
+		$output .= '<option value="' . $url . '" ' . $selected . '>' . $item->title; 		
 	}	
 
 	function end_el (&$output, $item, $depth ){
