@@ -20,26 +20,16 @@
  * @license    GPL-2.0+
  */
 
-// Plugin Directory 
-define( 'EA_DIR', dirname( __FILE__ ) );
+// Plugin basename, directory, and url.
+define( 'EA_BASE', plugin_basename( __FILE__ ) );
+define( 'EA_DIR' , plugin_dir_path( __FILE__ ) );
+define( 'EA_URL' , plugin_dir_url(  __FILE__ ) );
  
-// General
-include_once( EA_DIR . '/inc/general.php' );
-
-// WordPress Cleanup
-include_once( EA_DIR . '/inc/wordpress-cleanup.php' );
-
-// Editor Style Refresh
-include_once( EA_DIR . '/inc/editor-style-refresh.php' );
-
-// Post Types
-//include_once( EA_DIR . '/inc/post-types.php' );
-
-// Taxonomies 
-//include_once( EA_DIR . '/inc/taxonomies.php' );
-
-// Widgets
-//include_once( EA_DIR . '/inc/widget-social.php' );
-
-// Nav Menu Dropdown
-//include_once( EA_DIR . '/inc/nav-menu-dropdown.php' );
+// Includes
+require_once( EA_DIR . '/inc/general.php'              ); // General
+require_once( EA_DIR . '/inc/wordpress-cleanup.php'    ); // Misc WP cleanup
+require_once( EA_DIR . '/inc/editor-style-refresh.php' ); // Force editor refresh
+//require_once( EA_DIR . '/inc/cpt-testimonial.php'      ); // CPT functionality
+//require_once( EA_DIR . '/inc/cpt-columns.php'          ); // CPT column tweaks
+//require_once( EA_DIR . '/inc/widget.php'               ); // Widget template
+//require_once( EA_DIR . '/inc/synthesis.php'            ); // WebSynthesis tweaks
