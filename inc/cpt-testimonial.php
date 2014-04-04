@@ -30,9 +30,10 @@ class EA_Testimonials {
 		self::$instance =& $this;
 		
 		// Actions
-		add_action( 'init',       array( $this, 'register_tax'      )    );
-		add_action( 'init',       array( $this, 'register_cpt'      )    );
-		add_action( 'gettext',    array( $this, 'title_placeholder' )    );
+		add_action( 'init',          array( $this, 'register_tax'      )    );
+		add_action( 'init',          array( $this, 'register_cpt'      )    );
+		add_action( 'gettext',       array( $this, 'title_placeholder' )    );
+		add_action( 'pre_get_posts', array( $this, 'testimonial_query' )    );
 
 		// Column Filters
 		add_filter( 'manage_edit-testimonial_columns', array( $this, 'testimonial_columns' )        );
@@ -146,6 +147,16 @@ class EA_Testimonials {
 		}
 		return $translation;
 
+	}
+	
+	/**
+	 * Customize the Testimonials Query
+	 *
+	 */
+	function testimonial_query( $query ) {
+		if( $query->is_main_query() && !is_admin() && $query->is_post_type_archive( 'testimonial' ) ) {
+			$query->set( 'posts_per_page', 20 );
+		}
 	}
 
 	/**
