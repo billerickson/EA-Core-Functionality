@@ -85,7 +85,7 @@ add_filter( 'wp_get_attachment_image_attributes', 'ja_attachment_id_on_images', 
  * @param boolean $echo
  * @return string
  */
-function ea_cf( $key = '', $id = '', $echo = true ) {
+function ea_cf( $key = '', $id = '', $echo = false ) {
 	$id    = ( empty( $id ) ? get_the_ID() : $id );
 	$value = get_post_meta( $id, $key, true );
 	if ( $echo ) {
