@@ -70,8 +70,9 @@ function ea_pp( $obj, $label = '' ) {
  * @since  1.1.0
  */
 function ea_attachment_id_on_images( $attr, $attachment ) {
-	if( !strpos( $attr['class'], 'wp-image-' . $attachment->ID ) )
+	if( !strpos( $attr['class'], 'wp-image-' . $attachment->ID ) ) {
 		$attr['class'] .= ' wp-image-' . $attachment->ID;
+	}
 	return $attr;
 }
 add_filter( 'wp_get_attachment_image_attributes', 'ja_attachment_id_on_images', 10, 2 );
@@ -105,8 +106,9 @@ function ea_cf( $key = '', $id = '', $echo = false ) {
 function ea_is_developer() {
 
 	// Check if user is logged in
-	if ( !is_user_logged_in() )
+	if ( !is_user_logged_in() ) {
 		return false;
+	}
 
 	// Approved developer
 	$approved = array( 
@@ -152,8 +154,9 @@ function ea_is_dev_site() {
  */
 function ea_dev_color_scheme( $color_scheme ) {
 
-	if ( ea_is_developer() && ea_is_dev_site() )
+	if ( ea_is_developer() && ea_is_dev_site() ) {
 		$color_scheme = 'coffee';
+	}
 
 	return $color_scheme;
 
@@ -166,8 +169,9 @@ add_filter( 'get_user_option_admin_color', 'ea_dev_color_scheme', 5 );
  * @since 1.0.0
  */
 function ea_hide_acf_admin_menu() {
-	if ( ea_is_developer() == false )
+	if ( ea_is_developer() == false ) {
 		remove_menu_page( 'edit.php?post_type=acf' );
+	}
 }
 add_action( 'admin_menu', 'ea_hide_acf_admin_menu', 999 );
 
@@ -204,8 +208,9 @@ add_filter( 'jetpack_development_mode', 'ea_jetpack_dev_mode' );
  */
 function ea_gravityforms_domain( $notification, $form, $entry ) {
 
-	if( $notification['name'] == 'Admin Notification' )
+	if( $notification['name'] == 'Admin Notification' ) {
 		$notification['message'] .= 'Sent from ' . home_url();
+	}
 
 	return $notification;
 }
