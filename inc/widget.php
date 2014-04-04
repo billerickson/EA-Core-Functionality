@@ -13,7 +13,7 @@
  *
  * @since 1.0.0
  */
-class ea_sample_widget extends WP_Widget {
+class EA_Sample_Widget extends WP_Widget {
 
 	/**
 	 * Holds widget settings defaults, populated in constructor.
@@ -121,4 +121,4 @@ class ea_sample_widget extends WP_Widget {
 		<?php
 	}
 }
-add_action( 'widgets_init', create_function( '', "register_widget('ea_sample_widget');" ) );
+add_action( 'widgets_init', create_function( '', "register_widget('EA_Sample_Widget');" ) );
