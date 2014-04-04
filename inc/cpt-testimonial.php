@@ -139,12 +139,8 @@ class EA_Testimonials {
 	function title_placeholder( $translation ) {
 
 		global $post;
-		if ( isset( $post ) ) {
-			switch( $post->post_type ){
-				case 'testimonials' :
-					if ( $translation == 'Enter title here' ) return 'Enter Name Here';
-					break;
-			}
+		if ( isset( $post ) && 'testimonial' == $post->post_type && 'Enter title here' == $translation ) {
+			$translation = 'Enter Name Here';
 		}
 		return $translation;
 
