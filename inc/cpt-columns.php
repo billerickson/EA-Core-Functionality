@@ -13,7 +13,7 @@
  *
  * @since 1.2.0
  */
-class ea_cpt_columns {
+class EA_CPT_Columns {
 
 	static $instance;
 
@@ -90,4 +90,4 @@ class ea_cpt_columns {
 	}
 
 }
-new ea_cpt_columns;
+new EA_CPT_Columns;
