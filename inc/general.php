@@ -125,11 +125,7 @@ function ea_is_developer() {
 	$current_user = strtolower( $current_user->user_login );
 
 	// Check if current user is approved developer
-	if ( in_array( $current_user, $approved ) ) {
-		return true;
-	} else {
-		return false;
-	}
+	return in_array( $current_user, $approved );
 }
 
 /**
