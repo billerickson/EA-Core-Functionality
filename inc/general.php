@@ -144,11 +144,7 @@ function ea_is_dev_site() {
 	$be_dev  =  strpos( home_url(), 'master-wp.com' );
 	$wpe_dev =  strpos( home_url(), 'staging'       );
 
-	if ( $ja_dev || $be_dev || $wpe_dev ) {
-		return true;
-	} else {
-		return false;
-	}
+	return ( $ja_dev || $be_dev || $wpe_dev );
 }
 
 /**
