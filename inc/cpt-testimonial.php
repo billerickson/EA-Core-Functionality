@@ -30,10 +30,11 @@ class EA_Testimonials {
 		self::$instance =& $this;
 		
 		// Actions
-		add_action( 'init',          array( $this, 'register_tax'      )    );
-		add_action( 'init',          array( $this, 'register_cpt'      )    );
-		add_action( 'gettext',       array( $this, 'title_placeholder' )    );
-		add_action( 'pre_get_posts', array( $this, 'testimonial_query' )    );
+		add_action( 'init',              array( $this, 'register_tax'      )    );
+		add_action( 'init',              array( $this, 'register_cpt'      )    );
+		add_action( 'gettext',           array( $this, 'title_placeholder' )    );
+		add_action( 'pre_get_posts',     array( $this, 'testimonial_query' )    );
+		add_action( 'template_redirect', array( $this, 'redirect_single'   )    );
 
 		// Column Filters
 		add_filter( 'manage_edit-testimonial_columns', array( $this, 'testimonial_columns' )        );
@@ -152,10 +153,24 @@ class EA_Testimonials {
 	/**
 	 * Customize the Testimonials Query
 	 *
+	 * @since 1.2.0
+	 * @param object $query
 	 */
 	function testimonial_query( $query ) {
 		if( $query->is_main_query() && !is_admin() && $query->is_post_type_archive( 'testimonial' ) ) {
 			$query->set( 'posts_per_page', 20 );
+		}
+	}
+	
+	/**
+	 * Redirect Single Testimonials
+	 *
+	 * @since 1.2.0
+	 */
+	function redirect_single() {
+		if( is_singular( 'testimonial' ) ) {
+			wp_redirect( get_post_type_archive_link( 'testimonial' ) );
+			exit;
 		}
 	}
 
