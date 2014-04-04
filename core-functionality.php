@@ -1,7 +1,6 @@
 <?php
 /**
  * Plugin Name: Core Functionality
- * Plugin URI:  https://github.com/billerickson/Core-Functionality
  * Description: This contains all your site's core functionality so that it is theme independent. <strong>It should always be activated</strong>.
  * Version:     1.1.0
  * Author:      Bill Erickson & Jared Atchison
