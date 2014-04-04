@@ -16,7 +16,7 @@
  *
  * @since 1.2.0
  */
-class ea_testimonials {
+class EA_Testimonials {
 
 	static $instance;
 
@@ -142,4 +142,4 @@ class ea_testimonials {
 	}
 	
 }
-new ea_testimonials();
+new EA_Testimonials();
