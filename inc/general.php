@@ -185,10 +185,9 @@ add_action( 'admin_menu', 'ea_hide_acf_admin_menu', 999 );
  */
 function ea_jetpack_dev_mode( $development_mode ) {
 	if ( ea_is_dev_site() == true ) {
-		return true;
-	} else {
-		return $development_mode;
+		$development_mode = true;
 	}
+	return $development_mode;
 }
 add_filter( 'jetpack_development_mode', 'ea_jetpack_dev_mode' );
 
