@@ -1,15 +1,11 @@
 <?php
 /**
- * WordPress Cleanup
- *
- * This file registers any custom taxonomies
- *
- * @package      Core_Functionality
- * @since        1.0.0
- * @link         https://github.com/billerickson/Core-Functionality
- * @author       Bill Erickson <bill@billerickson.net>
- * @copyright    Copyright (c) 2011, Bill Erickson
- * @license      http://opensource.org/licenses/gpl-2.0.php GNU Public License
+ * Core Functionality Plugin
+ * 
+ * @package    CoreFunctionality
+ * @since      1.0.0
+ * @copyright  Copyright (c) 2014, Bill Erickson & Jared Atchison
+ * @license    GPL-2.0+
  */
 
 // Disable Post Formats UI

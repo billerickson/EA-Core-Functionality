@@ -1,5 +1,14 @@
 <?php
 /**
+ * Core Functionality Plugin
+ * 
+ * @package    CoreFunctionality
+ * @since      1.0.0
+ * @copyright  Copyright (c) 2014, Bill Erickson & Jared Atchison
+ * @license    GPL-2.0+
+ */
+
+/**
  * Plugin Name: T5 Fresh Editor Stylesheets
  * Description: Enforces fresh editor stylesheets per version parameter.
  * Version:     2012.07.21
