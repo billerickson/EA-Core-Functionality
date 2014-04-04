@@ -187,6 +187,27 @@ function ea_hide_acf_admin_menu() {
 add_action( 'admin_menu', 'ea_hide_acf_admin_menu', 999 );
 
 /**
+ * Force Jetpack dev mode on development sites
+ *
+ * If Jetpack is activated on two sites with the same Blog ID (say production 
+ * and development) this can severely screw things with the URL associated for
+ * the account. To prevent this, if Jetpack is activated on a development site,
+ * we force it into development mode.
+ *
+ * @since 1.2.0
+ * @param boolean $development_mode
+ * @return boolean
+ */
+function ea_jetpack_dev_mode( $development_mode ) {
+	if ( ea_is_dev_site() == true ) {
+		return true;
+	} else {
+		return $development_mode;
+	}
+}
+add_filter( 'jetpack_development_mode', 'ea_jetpack_dev_mode' );
+
+/**
  * Gravity Forms Domain
  *
  * Adds a notice at the end of admin email notifications 
