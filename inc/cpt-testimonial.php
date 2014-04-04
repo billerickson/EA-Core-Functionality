@@ -110,7 +110,7 @@ class EA_Testimonials {
 		$args = array( 
 			'labels'              => $labels,
 			'hierarchical'        => false,
-			'supports'            => array( 'title', 'editor' ),   
+			'supports'            => array( 'title', 'editor', 'thumbnail' ),   
 			'public'              => true,
 			'show_ui'             => true,
 			'show_in_menu'        => true,
@@ -184,10 +184,8 @@ class EA_Testimonials {
 
 		$columns = array(
 			'cb'                  => '<input type="checkbox" />',
+			'thumbnail'           => 'Thumbnail',
 			'title'               => 'Name',
-			'testimonial_byline'  => 'Byline',
-			'testimonial_email'   => 'Email',
-			'testimonial_website' => 'Website',
 			'date'                => 'Date',
 		);
 
@@ -207,22 +205,6 @@ class EA_Testimonials {
 		global $post;
 
 		switch ( $column ) {
-			case 'testimonial_byline':
-				$testimonial = get_post_meta( $post_id, '_ja_testimonial', true );
-				echo !empty( $testimonial['byline'] ) ? $testimonial['byline'] : '-';
-				break;
-			case 'testimonial_email':
-				$testimonial = get_post_meta( $post_id, '_ja_testimonial', true );
-				if ( !empty( $testimonial['email'] ) ) {
-					echo get_avatar( $testimonial['email'], 16 ) . ' ' . $testimonial['email'];
-				} else {
-					echo '-';
-				}
-				break;
-			case 'testimonial_website':
-				$testimonial = get_post_meta( $post_id, '_ja_testimonial', true );
-				echo !empty( $testimonial['website'] ) ? $testimonial['website'] : '-';
-				break;
 			case 'thumbnail':
 				the_post_thumbnail( 'thumbnail' );
 				break;
