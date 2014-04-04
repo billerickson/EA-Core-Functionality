@@ -20,11 +20,9 @@
  * @license    GPL-2.0+
  */
 
-// Plugin basename, directory, and url.
-define( 'EA_BASE', plugin_basename( __FILE__ ) );
+// Plugin directory
 define( 'EA_DIR' , plugin_dir_path( __FILE__ ) );
-define( 'EA_URL' , plugin_dir_url(  __FILE__ ) );
- 
+
 // Includes
 require_once( EA_DIR . '/inc/general.php'              ); // General
 require_once( EA_DIR . '/inc/wordpress-cleanup.php'    ); // Misc WP cleanup
