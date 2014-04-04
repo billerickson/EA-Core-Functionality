@@ -152,16 +152,9 @@ function ea_is_dev_site() {
  */
 function ea_dev_color_scheme( $color_scheme ) {
 
-	if ( ea_is_developer() == false )
-		return $color_scheme;
-
-	$ja_dev = strpos( home_url(), 'wpdev.io'      );
-	$be_dev = strpos( home_url(), 'master-wp.com' );
-
-	if ( ea_is_dev_site() == true ) {
+	if ( ea_is_developer() && ea_is_dev_site() )
 		$color_scheme = 'coffee';
-	}
- 
+
 	return $color_scheme;
 
 }
