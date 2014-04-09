@@ -75,7 +75,7 @@ function ea_attachment_id_on_images( $attr, $attachment ) {
 	}
 	return $attr;
 }
-add_filter( 'wp_get_attachment_image_attributes', 'ja_attachment_id_on_images', 10, 2 );
+add_filter( 'wp_get_attachment_image_attributes', 'ea_attachment_id_on_images', 10, 2 );
 
 /**
  * Shortcut function for get_post_meta();
