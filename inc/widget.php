@@ -49,7 +49,7 @@ class EA_Sample_Widget extends WP_Widget {
 		);
 
 		// load widget
-		$this->WP_Widget( 'ja-sample-widget', 'EA Sample Widget', $widget_ops, $control_ops );
+		$this->WP_Widget( 'ea-sample-widget', 'EA Sample Widget', $widget_ops, $control_ops );
 
 	}
 
