@@ -116,7 +116,7 @@ class EA_Testimonials {
 			'show_in_menu'        => true,
 			'show_in_nav_menus'   => true,
 			'publicly_queryable'  => true,
-			'exclude_from_search' => true,
+			'exclude_from_search' => false,
 			'has_archive'         => true,
 			'query_var'           => true,
 			'can_export'          => true,
