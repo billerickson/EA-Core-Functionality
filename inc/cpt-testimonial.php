@@ -120,7 +120,7 @@ class EA_Testimonials {
 			'has_archive'         => true,
 			'query_var'           => true,
 			'can_export'          => true,
-			'rewrite'             => array( 'slug' => 'testimonials' ),
+			'rewrite'             => array( 'slug' => 'testimonials', 'with_front' => false ),
 			'menu_icon'           => 'dashicons-groups', // http://melchoyce.github.io/dashicons/
 		);
 
