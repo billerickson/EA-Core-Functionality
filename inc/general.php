@@ -84,11 +84,21 @@ add_filter( 'wp_get_attachment_image_attributes', 'ea_attachment_id_on_images', 
  * @param string $key
  * @param int $id
  * @param boolean $echo
+ * @param string $prepend
+ * @param string $append
+ * @param string $escape
  * @return string
  */
-function ea_cf( $key = '', $id = '', $echo = false ) {
+function ea_cf( $key = '', $id = '', $echo = false, $prepend = false, $append = false, $escape = false ) {
 	$id    = ( empty( $id ) ? get_the_ID() : $id );
 	$value = get_post_meta( $id, $key, true );
+	if( $escape )
+		$value = call_user_func( $escape, $value );
+	if( $prepend )
+		$value = $prepend . $value;
+	if( $append )
+		$value .= $append;
+		
 	if ( $echo ) {
 		echo $value;
 	} else {
