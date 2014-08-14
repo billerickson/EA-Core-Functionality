@@ -94,9 +94,9 @@ function ea_cf( $key = '', $id = '', $echo = false, $prepend = false, $append = 
 	$value = get_post_meta( $id, $key, true );
 	if( $escape )
 		$value = call_user_func( $escape, $value );
-	if( $prepend )
+	if( $value && $prepend )
 		$value = $prepend . $value;
-	if( $append )
+	if( $value && $append )
 		$value .= $append;
 		
 	if ( $echo ) {
