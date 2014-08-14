@@ -29,4 +29,3 @@ require_once( EA_DIR . '/inc/wordpress-cleanup.php'    ); // Misc WP cleanup
 require_once( EA_DIR . '/inc/editor-style-refresh.php' ); // Force editor refresh
 //require_once( EA_DIR . '/inc/cpt-testimonial.php'      ); // CPT functionality
 //require_once( EA_DIR . '/inc/widget.php'               ); // Widget template
-//require_once( EA_DIR . '/inc/synthesis.php'            ); // WebSynthesis tweaks
