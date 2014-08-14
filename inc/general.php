@@ -171,6 +171,26 @@ function ea_dev_color_scheme( $color_scheme ) {
 add_filter( 'get_user_option_admin_color', 'ea_dev_color_scheme', 5 );
 
 /**
+ * Search Engine Visiblity Settings
+ *
+ */
+function ea_se_visibility( $value ) {
+	return (int) ! ea_is_dev_site();
+}
+add_filter( 'pre_option_blog_public', 'ea_se_visibility' );
+
+/**
+ * Search Engine Visibility Warning
+ *
+ */
+function ea_se_visibility_warning() {
+	$visible = get_option( 'blog_public' );
+	if( ! ea_is_dev_site() && ! $visible )
+		echo '<div class="error"><p>This website is not visible to search engines. Please correct this in Settings > Reading</p></div>';
+}
+add_action( 'admin_notices', 'ea_se_visibility_warning' );
+
+/**
  * Hide ACF menu item from the admin menu
  *
  * @since 1.0.0
