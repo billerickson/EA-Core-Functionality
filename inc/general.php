@@ -11,9 +11,6 @@
 // Use shortcodes in widgets
 add_filter( 'widget_text', 'do_shortcode' );
 
-// Disable WPSEO columns on edit screen 
-add_filter( 'wpseo_use_page_analysis', '__return_false' );
-
 /**
  * Pretty Printing
  *
