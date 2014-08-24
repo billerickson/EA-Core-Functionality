@@ -163,6 +163,8 @@ function ea_dev_color_scheme( $color_scheme ) {
 
 	if ( ea_is_developer() && ea_is_dev_site() ) {
 		$color_scheme = 'coffee';
+	} else {
+		$color_scheme = 'fresh';
 	}
 
 	return $color_scheme;
