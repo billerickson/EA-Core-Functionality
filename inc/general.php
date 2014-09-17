@@ -200,6 +200,7 @@ add_action( 'admin_notices', 'ea_se_visibility_warning' );
 function ea_hide_acf_admin_menu() {
 	if ( ea_is_developer() == false ) {
 		remove_menu_page( 'edit.php?post_type=acf' );
+		remove_menu_page( 'edit.php?post_type=acf-field-group' );
 	}
 }
 add_action( 'admin_menu', 'ea_hide_acf_admin_menu', 999 );
