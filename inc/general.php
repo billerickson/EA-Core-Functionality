@@ -75,6 +75,18 @@ function ea_attachment_id_on_images( $attr, $attachment ) {
 add_filter( 'wp_get_attachment_image_attributes', 'ea_attachment_id_on_images', 10, 2 );
 
 /**
+ * Default Image Link is None
+ *
+ * @since 1.2.0
+ */
+function ea_default_image_link() {
+	$link = get_option( 'image_default_link_type' );
+	if( 'none' !== $link )
+		update_option( 'image_default_link_type', 'none' );
+}
+add_action( 'init', 'ea_default_image_link' );
+
+/**
  * Shortcut function for get_post_meta();
  *
  * @since 1.2.0
