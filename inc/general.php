@@ -145,11 +145,12 @@ function ea_is_developer() {
  */
 function ea_is_dev_site() {
 
-	$ja_dev  =  strpos( home_url(), 'wpdev.io'      );
-	$be_dev  =  strpos( home_url(), 'master-wp.com' );
-	$wpe_dev =  strpos( home_url(), 'staging'       );
+	$ja_dev    =  strpos( home_url(), 'wpdev.io'      );
+	$be_dev    =  strpos( home_url(), 'master-wp.com' );
+	$wpe_dev   =  strpos( home_url(), 'staging'       );
+	$local_dev =  strpos( home_url(), 'localhost'     );
 
-	return ( $ja_dev || $be_dev || $wpe_dev );
+	return ( $ja_dev || $be_dev || $wpe_dev || $local_dev );
 }
 
 /**
