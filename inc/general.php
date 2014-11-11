@@ -256,3 +256,14 @@ function ea_disable_registered_users_only( $exclusions ) {
 	return $exclusions;
 }
 //add_filter( 'registered-users-only_exclusions', 'ea_disable_registered_users_only' );
+
+/**
+ * ACF Options Page 
+ *
+ */
+function ea_acf_options_page() {
+    if( function_exists( 'acf_add_options_page' ) ) {
+        acf_add_options_page( 'Site Options' );
+    }
+}
+//add_action( 'init', 'ea_acf_options_page' );
