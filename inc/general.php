@@ -259,6 +259,37 @@ function ea_gravityforms_domain( $notification, $form, $entry ) {
 }
 add_filter( 'gform_notification', 'ea_gravityforms_domain', 10, 3 );
 
+/**
+ * Add Page Template as Page Column
+ *
+ */
+function ea_page_template_columns( $columns ) {
+	if( ! ea_is_developer() )
+		return $columns;
+	
+	$new_columns = array();	
+	foreach( $columns as $slug => $title ) {
+		$new_columns[$slug] = $title;
+		if( 'title' == $slug )
+			$new_columns['page_template'] = 'Page Template';
+	}
+	
+	return $new_columns;
+}
+add_filter( 'manage_edit-page_columns', 'ea_page_template_columns' );
+
+/**
+ * Page Template Column
+ *
+ */
+function ea_page_template_column( $column, $post_id ) {
+	
+	if( 'page_template' == $column ) {
+		$template = get_post_meta( $post_id, '_wp_page_template', true );
+		echo $template;	
+	}
+}
+add_action( 'manage_pages_custom_column', 'ea_page_template_column', 10, 2 );
 
 /**
  * Disable Registered Users Only 
