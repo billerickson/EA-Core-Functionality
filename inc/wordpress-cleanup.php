@@ -8,6 +8,51 @@
  * @license    GPL-2.0+
  */
 
+// Use shortcodes in widgets
+add_filter( 'widget_text', 'do_shortcode' );
+
+/**
+ * Attachment ID on Images
+ *
+ * @since  1.1.0
+ */
+function ea_attachment_id_on_images( $attr, $attachment ) {
+	if( !strpos( $attr['class'], 'wp-image-' . $attachment->ID ) ) {
+		$attr['class'] .= ' wp-image-' . $attachment->ID;
+	}
+	return $attr;
+}
+add_filter( 'wp_get_attachment_image_attributes', 'ea_attachment_id_on_images', 10, 2 );
+
+/**
+ * Default Image Link is None
+ *
+ * @since 1.2.0
+ */
+function ea_default_image_link() {
+	$link = get_option( 'image_default_link_type' );
+	if( 'none' !== $link )
+		update_option( 'image_default_link_type', 'none' );
+}
+add_action( 'init', 'ea_default_image_link' );
+
+/**
+ * Remove extra dashboard widgets
+ *
+ * @since 1.0.0
+ */
+function ea_remove_dashboard_widgets() {
+	//remove_meta_box( 'dashboard_right_now',       'dashboard', 'core' ); // Right Now
+	//remove_meta_box( 'dashboard_recent_comments', 'dashboard', 'core' ); // Recent Comments
+	remove_meta_box( 'dashboard_incoming_links',  'dashboard', 'core' );   // Incoming Links
+	remove_meta_box( 'dashboard_plugins',         'dashboard', 'core' );   // Plugins
+	remove_meta_box( 'dashboard_quick_press',     'dashboard', 'core' );   // Quick Press
+	remove_meta_box( 'dashboard_recent_drafts',   'dashboard', 'core' );   // Recent Drafts
+	remove_meta_box( 'dashboard_primary',         'dashboard', 'core' );   // WordPress Blog
+	remove_meta_box( 'dashboard_secondary',       'dashboard', 'core' );   // Other WordPress News
+}
+add_action( 'admin_menu', 'ea_remove_dashboard_widgets' );
+
 /**
  * Remove default WordPress widgets
  * 
@@ -28,23 +73,6 @@ function ea_remove_default_wp_widgets() {
 	unregister_widget( 'WP_Widget_Tag_Cloud'       );
 }
 //add_action( 'widgets_init', 'ea_remove_default_wp_widgets', 1 );
-
-/**
- * Remove extra dashboard widgets
- *
- * @since 1.0.0
- */
-function ea_remove_dashboard_widgets() {
-	//remove_meta_box( 'dashboard_right_now',       'dashboard', 'core' ); // Right Now
-	//remove_meta_box( 'dashboard_recent_comments', 'dashboard', 'core' ); // Recent Comments
-	remove_meta_box( 'dashboard_incoming_links',  'dashboard', 'core' );   // Incoming Links
-	remove_meta_box( 'dashboard_plugins',         'dashboard', 'core' );   // Plugins
-	remove_meta_box( 'dashboard_quick_press',     'dashboard', 'core' );   // Quick Press
-	remove_meta_box( 'dashboard_recent_drafts',   'dashboard', 'core' );   // Recent Drafts
-	remove_meta_box( 'dashboard_primary',         'dashboard', 'core' );   // WordPress Blog
-	remove_meta_box( 'dashboard_secondary',       'dashboard', 'core' );   // Other WordPress News
-}
-add_action( 'admin_menu', 'ea_remove_dashboard_widgets' );
 
 /**
  * Remove admin menu items
