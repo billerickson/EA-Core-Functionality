@@ -88,6 +88,28 @@ function ea_cf( $key = '', $id = '', $echo = false, $prepend = false, $append = 
 }
 
 /**
+ * Get the first term attached to post
+ *
+ * @param string $taxonomy
+ * @param string/int $field, pass false to return object
+ * @param int $post_id
+ * @return string/object
+ */
+function ea_first_term( $taxonomy = false, $field = 'name', $post_id = false ) {
+	$post_id = $post_id ? $post_id : get_the_ID();
+	$terms = get_the_terms( $post_id, $taxonomy );
+	if( empty( $terms ) || is_wp_error( $terms ) )
+		return false;
+	$term = array_shift( $terms );
+		
+	if( $field && isset( $term->$field ) )
+		return $term->$field;
+	
+	else
+		return $term;
+}
+
+/**
  * Check if current user is the developer
  *
  * @since 1.0.0
