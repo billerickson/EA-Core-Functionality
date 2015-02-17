@@ -35,21 +35,24 @@ class EA_Sample_Widget extends WP_Widget {
 			'title' => '',
 			'text' => '',
 		);
+		
+		// Widget Slug
+		$widget_slug = 'ea-sample-widget';
 
 		// widget basics
 		$widget_ops = array(
-			'classname'   => 'ea-sample-widget',
+			'classname'   => $widget_slug,
 			'description' => 'Widget description goes here.'
 		);
 
 		// widget controls
 		$control_ops = array(
-			'id_base' => 'ea-sample-widget',
+			'id_base' => $widget_slug,
 			//'width'   => '400',
 		);
 
 		// load widget
-		$this->WP_Widget( 'ea-sample-widget', 'EA Sample Widget', $widget_ops, $control_ops );
+		$this->WP_Widget( $widget_slug, 'EA Sample Widget', $widget_ops, $control_ops );
 
 	}
 
