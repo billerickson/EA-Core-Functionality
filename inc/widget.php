@@ -32,8 +32,8 @@ class EA_Sample_Widget extends WP_Widget {
 
 		// widget defaults
 		$this->defaults = array(
-			'title' => '',
-			'text' => '',
+			'title'          => '',
+			'widget_content' => '',
 		);
 		
 		// Widget Slug
@@ -78,8 +78,8 @@ class EA_Sample_Widget extends WP_Widget {
 			}
 
 			// Text
-			if ( !empty( $instance['text'] ) ) {
-				echo esc_html( $instance['text'] );
+			if ( !empty( $instance['widget_content'] ) ) {
+				echo esc_html( $instance['widget_content'] );
 			}
 
 		echo $after_widget;
@@ -96,8 +96,8 @@ class EA_Sample_Widget extends WP_Widget {
 	 */
 	function update( $new_instance, $old_instance ) {
 
-		$new_instance['title'] = strip_tags( $new_instance['title'] );
-		$new_instance['text']  = esc_html( $new_instance['text'] );
+		$new_instance['title']           = strip_tags( $new_instance['title'] );
+		$new_instance['widget_content']  = esc_html( $new_instance['widget_content'] );
 
 		return $new_instance;
 	}
@@ -118,8 +118,8 @@ class EA_Sample_Widget extends WP_Widget {
 			<input type="text" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" value="<?php echo esc_attr( $instance['title'] ); ?>" class="widefat" />
 		</p>
 		<p>
-			<label for="<?php echo $this->get_field_id( 'text' ); ?>">Text:</label>
-			<input type="text" id="<?php echo $this->get_field_id( 'text' ); ?>" name="<?php echo $this->get_field_name( 'text' ); ?>" value="<?php echo esc_attr( $instance['text'] ); ?>" class="widefat" />
+			<label for="<?php echo $this->get_field_id( 'widget_content' ); ?>">Text:</label>
+			<input type="text" id="<?php echo $this->get_field_id( 'widget_content' ); ?>" name="<?php echo $this->get_field_name( 'widget_content' ); ?>" value="<?php echo esc_attr( $instance['widget_content'] ); ?>" class="widefat" />
 		</p>
 		<?php
 	}
