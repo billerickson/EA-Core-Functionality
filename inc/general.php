@@ -8,6 +8,56 @@
  * @license    GPL-2.0+
  */
 
+/**
+ * Shortcut function for get_post_meta();
+ *
+ * @since 1.2.0
+ * @param string $key
+ * @param int $id
+ * @param boolean $echo
+ * @param string $prepend
+ * @param string $append
+ * @param string $escape
+ * @return string
+ */
+function ea_cf( $key = '', $id = '', $echo = false, $prepend = false, $append = false, $escape = false ) {
+	$id    = ( empty( $id ) ? get_the_ID() : $id );
+	$value = get_post_meta( $id, $key, true );
+	if( $escape )
+		$value = call_user_func( $escape, $value );
+	if( $value && $prepend )
+		$value = $prepend . $value;
+	if( $value && $append )
+		$value .= $append;
+		
+	if ( $echo ) {
+		echo $value;
+	} else {
+		return $value;
+	}
+}
+
+/**
+ * Get the first term attached to post
+ *
+ * @param string $taxonomy
+ * @param string/int $field, pass false to return object
+ * @param int $post_id
+ * @return string/object
+ */
+function ea_first_term( $taxonomy = 'category', $field = 'name', $post_id = false ) {
+	$post_id = $post_id ? $post_id : get_the_ID();
+	$terms = get_the_terms( $post_id, $taxonomy );
+	if( empty( $terms ) || is_wp_error( $terms ) )
+		return false;
+	$term = array_shift( $terms );
+		
+	if( $field && isset( $term->$field ) )
+		return $term->$field;
+	
+	else
+		return $term;
+}
 
 /**
  * Gravity Forms Domain
