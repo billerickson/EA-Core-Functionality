@@ -129,6 +129,20 @@ function ea_dev_color_scheme( $color_scheme ) {
 add_filter( 'get_user_option_admin_color', 'ea_dev_color_scheme', 5 );
 
 /**
+ * Only developer can access website
+ *
+ */
+function ea_dev_access_only() {
+
+	if( ! ea_is_developer() ) {
+		wp_redirect( 'http://www.google.com' );
+		exit;
+	}
+		
+}
+//add_action( 'genesis_meta', 'ea_dev_access_only' );
+
+/**
  * Search Engine Visiblity Settings
  *
  */
