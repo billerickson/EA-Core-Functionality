@@ -33,3 +33,4 @@ require_once( EA_DIR . '/inc/wordpress-cleanup.php'    ); // Misc WP cleanup
 require_once( EA_DIR . '/inc/kill-trackbacks.php'      ); // Kill trackbacks
 //require_once( EA_DIR . '/inc/cpt-testimonial.php'      ); // CPT functionality
 //require_once( EA_DIR . '/inc/widget.php'               ); // Widget template
+//require_once( EA_DIR . '/inc/share-count.php'          ); // Share count 
