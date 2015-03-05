@@ -223,11 +223,11 @@ function ea_share_button( $type = false, $post_id = false ) {
 	$count = json_decode( $count );
 	
 	if( 'fb-like' == $type && isset( $count->Facebook->like_count ) )
-		return '<a class="facebook-like-button" href="http://www.facebook.com/plugins/like.php?href=' . urlencode( $url ) . '"><span class="blue"><i class="icon-social-facebook"></i>Like</span> <span class="count">' . $count->Facebook->like_count . '</span></a>';
+		return '<a class="social-count facebook-like-button" href="http://www.facebook.com/plugins/like.php?href=' . urlencode( $url ) . '"><span class="blue"><i class="icon-social-facebook"></i>Like</span> <span class="count">' . $count->Facebook->like_count . '</span></a>';
 		
 	if( 'fb-share' == $type && isset( $count->Facebook->share_count ) )
-		return '<a class="facebook-share-button" href="http://www.facebook.com/plugins/share_button.php?href=' . urlencode( $url ) . '"><span class="blue"><i class="icon-social-facebook"></i>Share</span> <span class="count">' . $count->Facebook->share_count . '</span></a>';
+		return '<a class="social-count facebook-share-button" href="http://www.facebook.com/plugins/share_button.php?href=' . urlencode( $url ) . '"><span class="blue"><i class="icon-social-facebook"></i>Share</span> <span class="count">' . $count->Facebook->share_count . '</span></a>';
 		
 	if( 'twitter' == $type && isset( $count->Twitter ) )
-		return '<a class="twitter-button" href="https://twitter.com/share?url=' . $url . '&text=' . $title . '"><i class="icon-twitter"></i><span class="label">Tweet</span></a>';
+		return '<a class="social-count twitter-button" href="https://twitter.com/share?url=' . $url . '&text=' . $title . '"><span class="tweet"><i class="icon-twitter"></i><span class="label">Tweet</span></span><span class="count">' . $count->Twitter . '</span></a>';
 }
