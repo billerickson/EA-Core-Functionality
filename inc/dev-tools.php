@@ -104,8 +104,9 @@ function ea_is_dev_site() {
 	$be_dev    =  strpos( home_url(), 'master-wp.com' );
 	$wpe_dev   =  strpos( home_url(), 'staging'       );
 	$local_dev =  strpos( home_url(), 'localhost'     );
+	$dev_dev   =  strpos( home_url(), 'dev.'          );
 
-	return ( $ja_dev || $be_dev || $wpe_dev || $local_dev );
+	return ( $ja_dev || $be_dev || $wpe_dev || $local_dev || $dev_dev );
 }
 
 /**
