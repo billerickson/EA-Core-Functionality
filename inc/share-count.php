@@ -197,3 +197,37 @@ function ea_post_share_count( $post_id = false ) {
 function ea_site_share_count() {
 	return EA_Share_Count::instance()->site_share_count();
 }
+
+/**
+ * Output Sharing Button
+ * For styling: https://gist.github.com/billerickson/a67bf451675296b144ea
+ *
+ * @since 1.0.0
+ * @param string $type, button type
+ * @param int/string $post_id, pass 'site' for full site stats
+ * @return string $button_output
+ */
+function ea_share_button( $type = false, $post_id = false ) {
+	if( ! ( $post_id && $type ) )
+		return;
+		
+	if( 'site' == $post_id ) {
+		$count = ea_site_share_count();
+		$url = home_url();
+		$title = get_bloginfo( 'name' );
+	} else {
+		$count = ea_post_share_count( $post_id );
+		$url = get_permalink( $post_id );
+		$title = get_the_title( $post_id );
+	}
+	$count = json_decode( $count );
+	
+	if( 'fb-like' == $type && isset( $count->Facebook->like_count ) )
+		return '<a class="facebook-like-button" href="http://www.facebook.com/plugins/like.php?href=' . urlencode( $url ) . '"><span class="blue"><i class="icon-social-facebook"></i>Like</span> <span class="count">' . $count->Facebook->like_count . '</span></a>';
+		
+	if( 'fb-share' == $type && isset( $count->Facebook->share_count ) )
+		return '<a class="facebook-share-button" href="http://www.facebook.com/plugins/share_button.php?href=' . urlencode( $url ) . '"><span class="blue"><i class="icon-social-facebook"></i>Share</span> <span class="count">' . $count->Facebook->share_count . '</span></a>';
+		
+	if( 'twitter' == $type && isset( $count->Twitter ) )
+		return '<a class="twitter-button" href="https://twitter.com/share?url=' . $url . '&text=' . $title . '"><i class="icon-twitter"></i><span class="label">Tweet</span></a>';
+}
