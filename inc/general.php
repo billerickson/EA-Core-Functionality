@@ -50,7 +50,15 @@ function ea_first_term( $taxonomy = 'category', $field = 'name', $post_id = fals
 	$terms = get_the_terms( $post_id, $taxonomy );
 	if( empty( $terms ) || is_wp_error( $terms ) )
 		return false;
-	$term = array_shift( $terms );
+	
+	// Sort by post count
+	$list = array();	
+	foreach( $terms as $term )
+		$list[$term->count] = $term;
+	ksort( $list, SORT_NUMERIC );
+	
+	// Grab first in array
+	$term = array_shift( array_reverse( $list ) );
 		
 	if( $field && isset( $term->$field ) )
 		return $term->$field;
