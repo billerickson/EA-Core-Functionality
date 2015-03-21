@@ -18,16 +18,12 @@
  */
 class EA_Testimonials {
 
-	static $instance;
-
 	/**
 	 * Initialize all the things
 	 *
 	 * @since 1.2.0
 	 */
 	function __construct() {
-		
-		self::$instance =& $this;
 		
 		// Actions
 		add_action( 'init',              array( $this, 'register_tax'      )    );
