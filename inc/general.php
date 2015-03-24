@@ -106,9 +106,16 @@ add_action( 'admin_menu', 'ea_hide_acf_admin_menu', 999 );
  *
  */
 function ea_acf_options_page() {
-    if( function_exists( 'acf_add_options_page' ) ) {
+    if ( function_exists( 'acf_add_options_page' ) ) {
         acf_add_options_page( 'Site Options' );
     }
+    if ( function_exists( 'acf_add_options_sub_page' ) ){
+ 		 acf_add_options_sub_page( array(
+			'title'      => 'CPT Settings',
+			'parent'     => 'edit.php?post_type=CPT_slug',
+			'capability' => 'manage_options'
+		) );
+ 	}
 }
 //add_action( 'init', 'ea_acf_options_page' );
 
