@@ -130,6 +130,19 @@ function ea_dev_color_scheme( $color_scheme ) {
 add_filter( 'get_user_option_admin_color', 'ea_dev_color_scheme', 5 );
 
 /**
+ * Force frontend admin bar color scheme when user is developer on development server
+ *
+ * @since 1.2.0
+ */
+function ea_dev_color_scheme_admin_bar() {
+	if ( ea_is_developer() && ea_is_dev_site() ) {
+		$color = apply_filters( 'ea_admin_bar_dev', '#59524c' );
+		echo "<style type='text/css'>#wpadminbar{background-color:$color!important}</style>";
+	}
+}
+add_action( 'wp_head', 'ea_dev_color_scheme_admin_bar' );
+
+/**
  * Only developer can access website
  *
  */
