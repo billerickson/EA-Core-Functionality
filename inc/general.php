@@ -94,7 +94,7 @@ add_filter( 'gform_notification', 'ea_gravityforms_domain', 10, 3 );
  * @since 1.0.0
  */
 function ea_hide_acf_admin_menu() {
-	if ( ! function_exists( 'ea_is_developer' ) || ea_is_developer() == false ) {
+	if ( function_exists( 'ea_is_developer' ) && ea_is_developer() == false ) {
 		remove_menu_page( 'edit.php?post_type=acf' );
 		remove_menu_page( 'edit.php?post_type=acf-field-group' );
 	}
