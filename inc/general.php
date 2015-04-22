@@ -58,7 +58,8 @@ function ea_first_term( $taxonomy = 'category', $field = 'name', $post_id = fals
 	ksort( $list, SORT_NUMERIC );
 	
 	// Grab first in array
-	$term = array_shift( array_reverse( $list ) );
+	$list = array_reverse( $list );
+	$term = array_shift( $list );
 		
 	if( $field && isset( $term->$field ) )
 		return $term->$field;
