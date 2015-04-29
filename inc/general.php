@@ -69,6 +69,30 @@ function ea_first_term( $taxonomy = 'category', $field = 'name', $post_id = fals
 }
 
 /**
+ * Conditional CSS Classes
+ *
+ * @param string $base_classes, classes applied always applied
+ * @param string $optional_class, additional class applied if $conditional is true
+ * @param bool $conditional, whether to add $optional_class or not
+ * @return string $classes
+ */
+function ea_class( $base_classes, $optional_class, $conditional ) {
+	return $conditional ? $base_classes . ' ' . $optional_class : $base_classes;
+}
+
+/**
+ * Column Classes
+ *
+ * @param int $type, number from 2-6
+ * @param int $count, current count in the loop
+ */
+function ea_column_class( $type, $count ) {
+	$classes = array( '', '', 'one-half', 'one-third', 'one-fourth', 'one-fifth', 'one-sixth' );
+	if( isset( $classes[$type] ) )
+		return ea_class( $classes[$type], 'first', 0 == $count % $type );
+}
+
+/**
  * Gravity Forms Domain
  *
  * Adds a notice at the end of admin email notifications 
