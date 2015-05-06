@@ -114,17 +114,16 @@ function ea_gravityforms_domain( $notification, $form, $entry ) {
 add_filter( 'gform_notification', 'ea_gravityforms_domain', 10, 3 );
 
 /**
- * Hide ACF menu item from the admin menu
+ * Prevent ACF access site-wide for non-developers.
  *
- * @since 1.0.0
  */
-function ea_hide_acf_admin_menu() {
-	if ( function_exists( 'ea_is_developer' ) && ea_is_developer() == false ) {
-		remove_menu_page( 'edit.php?post_type=acf' );
-		remove_menu_page( 'edit.php?post_type=acf-field-group' );
+function ea_prevent_acf_access() {
+	if ( function_exists( 'ea_is_developer' ) && ea_is_developer() ) {
+		return 'manage_options';
 	}
+	return false;
 }
-add_action( 'admin_menu', 'ea_hide_acf_admin_menu', 999 );
+add_filter ('acf/settings/capability', 'ea_prevent_acf_access' );
 
 /**
  * ACF Options Page 
