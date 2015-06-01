@@ -33,7 +33,7 @@ class EA_Recent_DB extends WP_CLI_Command {
 		// Get options
 		global $wpdb;
 		$results = $wpdb->get_results( 
-			$wpdb->prepare( 'SELECT * FROM wp_options ORDER BY option_id DESC LIMIT 0, %d', (int) $count ),
+			$wpdb->prepare( "SELECT * FROM $wpdb->options ORDER BY option_id DESC LIMIT 0, %d", (int) $count ),
 			OBJECT
 		);
 		if( $results ) {
@@ -78,12 +78,12 @@ class EA_Recent_DB extends WP_CLI_Command {
 		global $wpdb;
 		if( $post_id ) {
 			$results = $wpdb->get_results( 
-				$wpdb->prepare( 'SELECT * FROM wp_postmeta WHERE post_id = %d ORDER BY meta_id DESC LIMIT 0, %d', $post_id, $count ),
+				$wpdb->prepare( "SELECT * FROM $wpdb->postmeta WHERE post_id = %d ORDER BY meta_id DESC LIMIT 0, %d", $post_id, $count ),
 				OBJECT
 			);		
 		} else {
 			$results = $wpdb->get_results( 
-				$wpdb->prepare( 'SELECT * FROM wp_postmeta ORDER BY meta_id DESC LIMIT 0, %d', $count ),
+				$wpdb->prepare( "SELECT * FROM $wpdb->postmeta ORDER BY meta_id DESC LIMIT 0, %d", $count ),
 				OBJECT
 			);		
 		}
