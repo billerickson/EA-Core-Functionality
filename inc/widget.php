@@ -52,7 +52,7 @@ class EA_Sample_Widget extends WP_Widget {
 		);
 
 		// load widget
-		$this->WP_Widget( $widget_slug, 'EA Sample Widget', $widget_ops, $control_ops );
+		parent::__construct( $widget_slug, 'EA Sample Widget', $widget_ops, $control_ops );		
 
 	}
 
