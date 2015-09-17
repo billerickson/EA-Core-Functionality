@@ -8,6 +8,12 @@
  * @license    GPL-2.0+
  */
 
+// Don't let WPGA create yet another top level menu
+add_filter( 'wpga_menu_on_top', '__return_false' );
+
+// Don't let WPSEO metabox be high priority
+add_filter( 'wpseo_metabox_prio', function(){ return 'low'; } );
+
 /**
  * Gravity Forms Domain
  *
