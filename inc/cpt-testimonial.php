@@ -33,11 +33,11 @@ class EA_Testimonials {
 		add_action( 'template_redirect', array( $this, 'redirect_single'   )    );
 
 		// Column Filters
-		add_filter( 'manage_edit-testimonial_columns', array( $this, 'testimonial_columns' )        );
+		add_filter( 'manage_edit-testimonial_columns',        array( $this, 'testimonial_columns' )        );
 
 		// Column Actions
-		add_action( 'manage_pages_custom_column',      array( $this, 'custom_columns'      ), 10, 2 );
-		add_action( 'manage_posts_custom_column',      array( $this, 'custom_columns'      ), 10, 2 );
+		add_action( 'manage_testimonial_pages_custom_column', array( $this, 'custom_columns'      ), 10, 2 );
+		add_action( 'manage_testimonial_posts_custom_column', array( $this, 'custom_columns'      ), 10, 2 );
 	}
 
 	/**
