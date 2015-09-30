@@ -74,7 +74,7 @@ class EA_Sample_Widget extends WP_Widget {
 
 			// Title
 			if ( !empty( $instance['title'] ) ) { 
-				echo $before_title . $instance['title'] . $after_title;
+				echo $before_title . apply_filters( 'widget_title', $instance['title'] ) . $after_title;
 			}
 
 			// Text
