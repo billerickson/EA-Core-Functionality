@@ -104,16 +104,13 @@ function ea_is_developer() {
  */
 function ea_is_dev_site() {
 
-	$ja_dev     =  strpos( home_url(), 'wpdev.io'      );
-	$be_dev     =  strpos( home_url(), 'master-wp.com' );
-	$be_dev2    =  strpos( home_url(), 'localdev'      );
-	$wpe_dev    =  strpos( home_url(), 'staging'       );
-	$local_dev  =  strpos( home_url(), 'localhost'     );
-	$dev_dev    =  strpos( home_url(), 'dev.'          );
-	$vvv_dev    =  strpos( home_url(), '.dev'          );
-	$rb_dev     =  strpos( home_url(), 'gibraltar'     );
-
-	return ( $ja_dev || $be_dev || $be_dev2 || $wpe_dev || $local_dev || $dev_dev || $vvv_dev || $rb_dev );
+	$dev_strings = array( 'wpdev.io', 'master-wp.com', 'localdev', 'staging', 'localhost', 'dev.', '.dev', 'gibraltar' );
+	$is_dev_site = false;
+	foreach( $dev_strings as $string )
+		if( strpos( home_url(), $string ) )
+			$is_dev_site = true;
+			
+	return $is_dev_site;
 }
 
 /**
