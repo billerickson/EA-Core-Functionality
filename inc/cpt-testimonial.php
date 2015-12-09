@@ -117,7 +117,7 @@ class EA_Testimonials {
 			'query_var'           => true,
 			'can_export'          => true,
 			'rewrite'             => array( 'slug' => 'testimonials', 'with_front' => false ),
-			'menu_icon'           => 'dashicons-groups', // http://melchoyce.github.io/dashicons/
+			'menu_icon'           => 'dashicons-groups', // https://developer.wordpress.org/resource/dashicons/
 		);
 
 		register_post_type( 'testimonial', $args );
