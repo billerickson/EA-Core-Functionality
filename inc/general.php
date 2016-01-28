@@ -84,3 +84,17 @@ function ea_dont_update_core_func_plugin( $r, $url ) {
     return $r;
  }
 add_filter( 'http_request_args', 'ea_dont_update_core_func_plugin', 5, 2 );
+
+/**
+ * Author Links on CF Plugin
+ *
+ */
+function ea_author_links_on_cf_plugin( $links, $file ) {
+
+	if ( strpos( $file, 'core-functionality.php' ) !== false ) {
+		$links[1] = 'By <a href="http://www.billerickson.net">Bill Erickson</a> & <a href="http://www.jaredatchison.com">Jared Atchison</a>';
+    }
+    
+    return $links;
+}
+add_filter( 'plugin_row_meta', 'ea_author_links_on_cf_plugin', 10, 2 );
