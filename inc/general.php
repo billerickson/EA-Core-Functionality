@@ -53,7 +53,10 @@ add_filter ('acf/settings/capability', 'ea_prevent_acf_access' );
  */
 function ea_acf_options_page() {
     if ( function_exists( 'acf_add_options_page' ) ) {
-        acf_add_options_page( 'Site Options' );
+        acf_add_options_page( array( 
+        	'title'      => 'Site Options',
+        	'capability' => 'manage_options',
+        ) );
     }
     if ( function_exists( 'acf_add_options_sub_page' ) ){
  		 acf_add_options_sub_page( array(
