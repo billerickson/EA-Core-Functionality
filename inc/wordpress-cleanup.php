@@ -103,3 +103,18 @@ function ea_remove_admin_bar_items() {
 	$wp_admin_bar->remove_menu( 'new-link', 'new-content' );  // Links
 }
 //add_action( 'wp_before_admin_bar_render', 'ea_remove_admin_bar_items' );
+
+
+/**
+ * Fix the Post Title Link on Edit Comments
+ *
+ */
+function be_fix_post_title_link_on_edit_comments( $link, $post_id, $context ) {
+
+	$screen = get_current_screen();
+	if( is_admin() && $screen->base == 'edit-comments' )
+		$link = get_permalink( $post_id );
+
+	return $link;
+}
+add_filter( 'get_edit_post_link', 'be_fix_post_title_link_on_edit_comments', 10, 3 );
