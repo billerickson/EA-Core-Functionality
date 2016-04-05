@@ -111,8 +111,11 @@ function ea_remove_admin_bar_items() {
  */
 function be_fix_post_title_link_on_edit_comments( $link, $post_id, $context ) {
 
+	if( ! is_admin() )
+		return $link;
+		
 	$screen = get_current_screen();
-	if( is_admin() && $screen->base == 'edit-comments' )
+	if( $screen->base == 'edit-comments' )
 		$link = get_permalink( $post_id );
 
 	return $link;
