@@ -15,6 +15,17 @@ add_filter( 'wpga_menu_on_top', '__return_false' );
 add_filter( 'wpseo_metabox_prio', function(){ return 'low'; } );
 
 /**
+ * Remove WPSEO Notifications
+ *
+ */
+function ea_remove_wpseo_notifications() {
+
+	remove_action( 'admin_notices', array( Yoast_Notification_Center::get(), 'display_notifications' ) );
+	remove_action( 'all_admin_notices', array( Yoast_Notification_Center::get(), 'display_notifications' ) );
+}
+add_action( 'init', 'ea_remove_wpseo_notifications' );
+
+/**
  * Gravity Forms Domain
  *
  * Adds a notice at the end of admin email notifications 
