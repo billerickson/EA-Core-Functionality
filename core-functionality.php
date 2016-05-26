@@ -25,7 +25,6 @@ define( 'EA_DIR' , plugin_dir_path( __FILE__ ) );
 
 // Developer Tools, can be removed in Production
 require_once( EA_DIR . '/inc/dev-tools.php'            ); // Developer tools
-require_once( EA_DIR . '/inc/wpcli-commands.php'       ); // WP CLI Commands
 
 // Site Functionality
 require_once( EA_DIR . '/inc/general.php'              ); // General
