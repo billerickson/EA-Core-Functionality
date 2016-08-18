@@ -121,3 +121,14 @@ function be_fix_post_title_link_on_edit_comments( $link, $post_id, $context ) {
 	return $link;
 }
 add_filter( 'get_edit_post_link', 'be_fix_post_title_link_on_edit_comments', 10, 3 );
+
+/**
+ * Remove ancient Custom Fields Metabox because it's slow and most often useless anymore
+ * ref: https://core.trac.wordpress.org/ticket/33885
+ */
+function jb_remove_post_custom_fields_now() {
+	foreach ( get_post_types( '', 'names' ) as $post_type ) {
+		remove_meta_box( 'postcustom' , $post_type , 'normal' );
+	}
+}
+add_action( 'admin_menu' , 'jb_remove_post_custom_fields_now' );
