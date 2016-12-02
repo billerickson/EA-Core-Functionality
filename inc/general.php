@@ -1,7 +1,7 @@
 <?php
 /**
  * Core Functionality Plugin
- * 
+ *
  * @package    CoreFunctionality
  * @since      1.0.0
  * @copyright  Copyright (c) 2014, Bill Erickson & Jared Atchison
@@ -22,7 +22,7 @@ function ea_remove_wpseo_notifications() {
 
 	if( ! class_exists( 'Yoast_Notification_Center' ) )
 		return;
-		
+
 	remove_action( 'admin_notices', array( Yoast_Notification_Center::get(), 'display_notifications' ) );
 	remove_action( 'all_admin_notices', array( Yoast_Notification_Center::get(), 'display_notifications' ) );
 }
@@ -31,7 +31,7 @@ add_action( 'init', 'ea_remove_wpseo_notifications' );
 /**
  * Gravity Forms Domain
  *
- * Adds a notice at the end of admin email notifications 
+ * Adds a notice at the end of admin email notifications
  * specifying the domain from which the email was sent.
  *
  * @param array $notification
@@ -50,39 +50,52 @@ function ea_gravityforms_domain( $notification, $form, $entry ) {
 add_filter( 'gform_notification', 'ea_gravityforms_domain', 10, 3 );
 
 /**
- * Prevent ACF access site-wide for non-developers.
+ * Carbon Fields Compatibility
+ * If plugin is deactivated for some reason, this prevents errors on frontend
  *
  */
-function ea_prevent_acf_access() {
-	if ( function_exists( 'ea_is_developer' ) && ea_is_developer() ) {
-		return 'manage_options';
-	}
-	return false;
+function ea_carbon_fields_compat() {
+
+
+  if ( ! function_exists( 'carbon_get_post_meta' ) ) {
+      function carbon_get_post_meta( $id, $name, $type = null ) {
+          return false;
+      }
+  }
+
+  if ( ! function_exists( 'carbon_get_the_post_meta' ) ) {
+      function carbon_get_the_post_meta( $name, $type = null ) {
+          return false;
+      }
+  }
+
+  if ( ! function_exists( 'carbon_get_theme_option' ) ) {
+      function carbon_get_theme_option( $name, $type = null ) {
+          return false;
+      }
+  }
+
+  if ( ! function_exists( 'carbon_get_term_meta' ) ) {
+      function carbon_get_term_meta( $id, $name, $type = null ) {
+          return false;
+      }
+  }
+
+  if ( ! function_exists( 'carbon_get_user_meta' ) ) {
+      function carbon_get_user_meta( $id, $name, $type = null ) {
+          return false;
+      }
+  }
+
+  if ( ! function_exists( 'carbon_get_comment_meta' ) ) {
+      function carbon_get_comment_meta( $id, $name, $type = null ) {
+          return false;
+      }
+  }
 }
-add_filter ('acf/settings/capability', 'ea_prevent_acf_access' );
+add_action( 'plugins_loaded', 'ea_carbon_fields_compat' );
 
 /**
- * ACF Options Page 
- *
- */
-function ea_acf_options_page() {
-    if ( function_exists( 'acf_add_options_page' ) ) {
-        acf_add_options_page( array( 
-        	'title'      => 'Site Options',
-        	'capability' => 'manage_options',
-        ) );
-    }
-    if ( function_exists( 'acf_add_options_sub_page' ) ){
- 		 acf_add_options_sub_page( array(
-			'title'      => 'CPT Settings',
-			'parent'     => 'edit.php?post_type=CPT_slug',
-			'capability' => 'manage_options'
-		) );
- 	}
-}
-//add_action( 'init', 'ea_acf_options_page' );
-
- /**
  * Dont Update the Plugin
  * If there is a plugin in the repo with the same name, this prevents WP from prompting an update.
  *
@@ -111,7 +124,7 @@ function ea_author_links_on_cf_plugin( $links, $file ) {
 	if ( strpos( $file, 'core-functionality.php' ) !== false ) {
 		$links[1] = 'By <a href="http://www.billerickson.net">Bill Erickson</a> & <a href="http://www.jaredatchison.com">Jared Atchison</a>';
     }
-    
+
     return $links;
 }
 add_filter( 'plugin_row_meta', 'ea_author_links_on_cf_plugin', 10, 2 );

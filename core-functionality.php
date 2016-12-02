@@ -32,3 +32,12 @@ require_once( EA_DIR . '/inc/wordpress-cleanup.php'    ); // Misc WP cleanup
 require_once( EA_DIR . '/inc/kill-trackbacks.php'      ); // Kill trackbacks
 //require_once( EA_DIR . '/inc/cpt-testimonial.php'      ); // CPT functionality
 //require_once( EA_DIR . '/inc/widget.php'               ); // Widget template
+
+/**
+ * Load Custom Fields
+ *
+ */
+function ea_load_custom_fields() {
+	require_once( EA_DIR . '/inc/custom-fields.php' );
+}
+add_action( 'carbon_register_fields', 'ea_load_custom_fields' );
