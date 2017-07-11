@@ -1,12 +1,13 @@
 <?php
 /**
- * Core Functionality Plugin
- * 
- * @package    CoreFunctionality
- * @since      1.0.0
- * @copyright  Copyright (c) 2014, Bill Erickson & Jared Atchison
- * @license    GPL-2.0+
- */
+ * Developer Tools
+ *
+ * @package      CoreFunctionality
+ * @author       Bill Erickson
+ * @since        1.0.0
+ * @license      GPL-2.0+
+**/
+
 
 /**
  * Pretty Printing
@@ -17,7 +18,7 @@
  * @param string $label
  * @return null
  */
-function ea_pp( $obj, $label = '' ) {  
+function ea_pp( $obj, $label = '' ) {
 	$data = json_encode( print_r( $obj,true ) );
 	?>
 	<style type="text/css">
@@ -35,7 +36,7 @@ function ea_pp( $obj, $label = '' ) {
 		height: 800px;
 		overflow: scroll;
 		}
-	</style>    
+	</style>
 	<script type="text/javascript">
 		var doStuff = function(){
 			var obj = <?php echo $data; ?>;
@@ -51,7 +52,7 @@ function ea_pp( $obj, $label = '' ) {
 			pre.innerHTML = obj;
 			h2.innerHTML = '<?php echo addslashes($label); ?>';
 			logger.appendChild(h2);
-			logger.appendChild(pre);      
+			logger.appendChild(pre);
 		};
 		window.addEventListener ("DOMContentLoaded", doStuff, false);
 	</script>
@@ -73,7 +74,7 @@ function ea_is_developer() {
 	}
 
 	// Approved developer
-	$approved = array( 
+	$approved = array(
 		'j-atchison',
 		'jatchison',
 		'jared',
@@ -109,7 +110,7 @@ function ea_is_dev_site() {
 	foreach( $dev_strings as $string )
 		if( strpos( home_url(), $string ) )
 			$is_dev_site = true;
-			
+
 	return $is_dev_site;
 }
 
@@ -156,7 +157,7 @@ function ea_dev_access_only() {
 		wp_redirect( 'http://www.google.com' );
 		exit;
 	}
-		
+
 }
 //add_action( 'genesis_meta', 'ea_dev_access_only' );
 
@@ -183,7 +184,7 @@ add_action( 'admin_notices', 'ea_se_visibility_warning' );
 /**
  * Force Jetpack dev mode on development sites
  *
- * If Jetpack is activated on two sites with the same Blog ID (say production 
+ * If Jetpack is activated on two sites with the same Blog ID (say production
  * and development) this can severely screw things with the URL associated for
  * the account. To prevent this, if Jetpack is activated on a development site,
  * we force it into development mode.
@@ -207,14 +208,14 @@ add_filter( 'jetpack_development_mode', 'ea_jetpack_dev_mode' );
 function ea_page_template_columns( $columns ) {
 	if( ! ea_is_developer() )
 		return $columns;
-	
-	$new_columns = array();	
+
+	$new_columns = array();
 	foreach( $columns as $slug => $title ) {
 		$new_columns[$slug] = $title;
 		if( 'title' == $slug )
 			$new_columns['page_template'] = 'Page Template';
 	}
-	
+
 	return $new_columns;
 }
 add_filter( 'manage_edit-page_columns', 'ea_page_template_columns' );
@@ -224,29 +225,29 @@ add_filter( 'manage_edit-page_columns', 'ea_page_template_columns' );
  *
  */
 function ea_page_template_column( $column, $post_id ) {
-	
+
 	if( 'page_template' == $column ) {
 		$template = get_post_meta( $post_id, '_wp_page_template', true );
-		echo $template;	
+		echo $template;
 	}
 }
 add_action( 'manage_pages_custom_column', 'ea_page_template_column', 10, 2 );
 
 /**
- * Disable Registered Users Only 
+ * Disable Registered Users Only
  *
  */
 function ea_disable_registered_users_only( $exclusions ) {
 	session_start();
-	
+
 	if( isset( $_GET['nologin'] ) && 'true' == $_GET['nologin'] ) {
 		$_SESSION['nologin'] = true;
 	}
-	
+
 	if( isset( $_GET['nologin'] ) && 'false' == $_GET['nologin'] ) {
 		$_SESSION['nologin'] = false;
 	}
-	
+
 	if( isset( $_SESSION['nologin'] ) &&  true == $_SESSION['nologin'] )
 		$exclusions[] = basename($_SERVER['PHP_SELF']);
 

@@ -1,12 +1,12 @@
 <?php
 /**
- * Core Functionality Plugin
+ * General
  *
- * @package    CoreFunctionality
- * @since      1.0.0
- * @copyright  Copyright (c) 2014, Bill Erickson & Jared Atchison
- * @license    GPL-2.0+
- */
+ * @package      CoreFunctionality
+ * @author       Bill Erickson
+ * @since        1.0.0
+ * @license      GPL-2.0+
+**/
 
 // Don't let WPGA create yet another top level menu
 add_filter( 'wpga_menu_on_top', '__return_false' );

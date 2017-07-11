@@ -1,18 +1,13 @@
 <?php
 /**
- * Core Functionality Plugin
- * 
- * @package    CoreFunctionality
- * @since      1.0.0
- * @copyright  Copyright (c) 2014, Bill Erickson & Jared Atchison
- * @license    GPL-2.0+
- */
-
-/**
- * Sample widget
+ * Sample Widget
  *
- * @since 1.0.0
- */
+ * @package      CoreFunctionality
+ * @author       Bill Erickson
+ * @since        1.0.0
+ * @license      GPL-2.0+
+**/
+
 class EA_Sample_Widget extends WP_Widget {
 
 	/**
@@ -35,7 +30,7 @@ class EA_Sample_Widget extends WP_Widget {
 			'title'          => '',
 			'widget_content' => '',
 		);
-		
+
 		// Widget Slug
 		$widget_slug = 'ea-sample-widget';
 
@@ -52,7 +47,7 @@ class EA_Sample_Widget extends WP_Widget {
 		);
 
 		// load widget
-		parent::__construct( $widget_slug, 'EA Sample Widget', $widget_ops, $control_ops );		
+		parent::__construct( $widget_slug, 'EA Sample Widget', $widget_ops, $control_ops );
 
 	}
 
@@ -60,8 +55,8 @@ class EA_Sample_Widget extends WP_Widget {
 	 * Outputs the HTML for this widget.
 	 *
 	 * @since 1.0.0
-	 * @param array $args An array of standard parameters for widgets in this theme 
-	 * @param array $instance An array of settings for this widget instance 
+	 * @param array $args An array of standard parameters for widgets in this theme
+	 * @param array $instance An array of settings for this widget instance
 	 */
 	function widget( $args, $instance ) {
 
@@ -73,7 +68,7 @@ class EA_Sample_Widget extends WP_Widget {
 		echo $before_widget;
 
 			// Title
-			if ( !empty( $instance['title'] ) ) { 
+			if ( !empty( $instance['title'] ) ) {
 				echo $before_title . apply_filters( 'widget_title', $instance['title'] ) . $after_title;
 			}
 
@@ -91,7 +86,7 @@ class EA_Sample_Widget extends WP_Widget {
 	 *
 	 * @since 1.0.0
 	 * @param array $new_instance An array of new settings as submitted by the admin
-	 * @param array $old_instance An array of the previous settings 
+	 * @param array $old_instance An array of the previous settings
 	 * @return array The validated and (if necessary) amended settings
 	 */
 	function update( $new_instance, $old_instance ) {

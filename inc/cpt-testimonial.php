@@ -1,21 +1,13 @@
 <?php
 /**
- * Core Functionality Plugin
- * 
- * @package    CoreFunctionality
- * @since      1.2.0
- * @copyright  Copyright (c) 2014, Bill Erickson & Jared Atchison
- * @license    GPL-2.0+
- */
-
-/**
  * Testimonials
  *
- * This file registers the testimonials custom post type
- * and setups the various functions and items it uses.
- *
- * @since 1.2.0
- */
+ * @package      CoreFunctionality
+ * @author       Bill Erickson
+ * @since        1.0.0
+ * @license      GPL-2.0+
+**/
+
 class EA_Testimonials {
 
 	/**
@@ -24,7 +16,7 @@ class EA_Testimonials {
 	 * @since 1.2.0
 	 */
 	function __construct() {
-		
+
 		// Actions
 		add_action( 'init',              array( $this, 'register_tax'      )    );
 		add_action( 'init',              array( $this, 'register_cpt'      )    );
@@ -47,7 +39,7 @@ class EA_Testimonials {
 	 */
 	function register_tax() {
 
-		$labels = array( 
+		$labels = array(
 			'name'                       => 'FOO',
 			'singular_name'              => 'FOO',
 			'search_items'               => 'Search FOOs',
@@ -65,7 +57,7 @@ class EA_Testimonials {
 			'menu_name'                  => 'FOOs',
 		);
 
-		$args = array( 
+		$args = array(
 			'labels'            => $labels,
 			'public'            => true,
 			'show_in_nav_menus' => true,
@@ -88,7 +80,7 @@ class EA_Testimonials {
 	 */
 	function register_cpt() {
 
-		$labels = array( 
+		$labels = array(
 			'name'               => 'Testimonials',
 			'singular_name'      => 'Testimonial',
 			'add_new'            => 'Add New',
@@ -103,10 +95,10 @@ class EA_Testimonials {
 			'menu_name'          => 'Testimonials',
 		);
 
-		$args = array( 
+		$args = array(
 			'labels'              => $labels,
 			'hierarchical'        => false,
-			'supports'            => array( 'title', 'editor', 'thumbnail' ),   
+			'supports'            => array( 'title', 'editor', 'thumbnail' ),
 			'public'              => true,
 			'show_ui'             => true,
 			'show_in_menu'        => true,
@@ -141,7 +133,7 @@ class EA_Testimonials {
 		return $translation;
 
 	}
-	
+
 	/**
 	 * Customize the Testimonials Query
 	 *
@@ -153,7 +145,7 @@ class EA_Testimonials {
 			$query->set( 'posts_per_page', 20 );
 		}
 	}
-	
+
 	/**
 	 * Redirect Single Testimonials
 	 *
@@ -202,6 +194,6 @@ class EA_Testimonials {
 				break;
 		}
 	}
-	
+
 }
 new EA_Testimonials();

@@ -1,12 +1,12 @@
 <?php
 /**
- * Core Functionality Plugin
+ * Custom Fields Helper
  *
- * @package    CoreFunctionality
- * @since      1.0.0
- * @copyright  Copyright (c) 2014, Bill Erickson & Jared Atchison
- * @license    GPL-2.0+
- */
+ * @package      CoreFunctionality
+ * @author       Bill Erickson
+ * @since        1.0.0
+ * @license      GPL-2.0+
+**/
 
 /**
   * Shortcut function for accessing custom fields

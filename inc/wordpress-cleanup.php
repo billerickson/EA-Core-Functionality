@@ -1,12 +1,12 @@
 <?php
 /**
- * Core Functionality Plugin
- * 
- * @package    CoreFunctionality
- * @since      1.0.0
- * @copyright  Copyright (c) 2014, Bill Erickson & Jared Atchison
- * @license    GPL-2.0+
- */
+ * WordPress Cleanup
+ *
+ * @package      CoreFunctionality
+ * @author       Bill Erickson
+ * @since        1.0.0
+ * @license      GPL-2.0+
+**/
 
 // Use shortcodes in widgets
 add_filter( 'widget_text', 'do_shortcode' );
@@ -55,7 +55,7 @@ add_action( 'admin_menu', 'ea_remove_dashboard_widgets' );
 
 /**
  * Remove default WordPress widgets
- * 
+ *
  * @since 1.0.0
  */
 function ea_remove_default_wp_widgets() {
@@ -113,7 +113,7 @@ function be_fix_post_title_link_on_edit_comments( $link, $post_id, $context ) {
 
 	if( ! is_admin() )
 		return $link;
-		
+
 	$screen = get_current_screen();
 	if( $screen->base == 'edit-comments' )
 		$link = get_permalink( $post_id );
