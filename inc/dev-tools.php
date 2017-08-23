@@ -115,16 +115,23 @@ function ea_is_dev_site() {
 }
 
 /**
- *  Force HTTPS on WPEngine install
+ * Force SSL on WPEngine install
+ *
+ * @author Bill Erickson
+ * @see https://www.billerickson.net/force-ssl-on-wpengine
  *
  */
-function ea_force_https_on_wpengine() {
-	if( strpos( home_url(), 'wpengine' ) && ! is_ssl() ) {
-		wp_redirect('https://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'], 301 );
+function ea_force_ssl_on_wpengine() {
+
+  if( strpos( home_url(), 'wpengine' ) && ! is_ssl() ) {
+
+    wp_redirect('https://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'], 301 );
 		exit();
+
 	}
 }
-add_action( 'template_redirect', 'ea_force_https_on_wpengine' );
+add_action( 'template_redirect', 'ea_force_ssl_on_wpengine' );
+
 
 /**
  * Force different color scheme when user is developer on development server
