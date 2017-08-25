@@ -217,3 +217,24 @@ function ea_page_template_column( $column, $post_id ) {
 	}
 }
 add_action( 'manage_pages_custom_column', 'ea_page_template_column', 10, 2 );
+
+/**
+ * Collect Images
+ *
+**/
+function ea_debug_collect_images( $image, $image_id ) {
+	global $ea_images;
+	$ea_images[] = $image_id;
+	return $image;
+}
+
+/**
+ * Display Images
+ *
+ */
+function ea_debug_display_images() {
+	global $ea_images;
+	ea_pp( join( ' ', array_unique( $ea_images ) ) );
+}
+//add_action( 'wp_footer', 'ea_debug_display_images' );
+//add_filter( 'wp_get_attachment_image_src', 'ea_debug_collect_images', 10, 2 );
