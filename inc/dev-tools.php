@@ -167,40 +167,6 @@ function ea_dev_color_scheme_admin_bar() {
 add_action( 'wp_head', 'ea_dev_color_scheme_admin_bar' );
 
 /**
- * Only developer can access website
- *
- */
-function ea_dev_access_only() {
-
-	if( ! ea_is_developer() ) {
-		wp_redirect( 'http://www.google.com' );
-		exit;
-	}
-
-}
-//add_action( 'genesis_meta', 'ea_dev_access_only' );
-
-/**
- * Search Engine Visiblity Settings
- *
- */
-function ea_se_visibility( $value ) {
-	return (int) ! ea_is_dev_site();
-}
-add_filter( 'pre_option_blog_public', 'ea_se_visibility' );
-
-/**
- * Search Engine Visibility Warning
- *
- */
-function ea_se_visibility_warning() {
-	$visible = get_option( 'blog_public' );
-	if( ! ea_is_dev_site() && ! $visible )
-		echo '<div class="error"><p>This website is not visible to search engines. Please correct this in Settings > Reading</p></div>';
-}
-add_action( 'admin_notices', 'ea_se_visibility_warning' );
-
-/**
  * Force Jetpack dev mode on development sites
  *
  * If Jetpack is activated on two sites with the same Blog ID (say production
