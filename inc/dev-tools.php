@@ -217,25 +217,3 @@ function ea_page_template_column( $column, $post_id ) {
 	}
 }
 add_action( 'manage_pages_custom_column', 'ea_page_template_column', 10, 2 );
-
-/**
- * Disable Registered Users Only
- *
- */
-function ea_disable_registered_users_only( $exclusions ) {
-	session_start();
-
-	if( isset( $_GET['nologin'] ) && 'true' == $_GET['nologin'] ) {
-		$_SESSION['nologin'] = true;
-	}
-
-	if( isset( $_GET['nologin'] ) && 'false' == $_GET['nologin'] ) {
-		$_SESSION['nologin'] = false;
-	}
-
-	if( isset( $_SESSION['nologin'] ) &&  true == $_SESSION['nologin'] )
-		$exclusions[] = basename($_SERVER['PHP_SELF']);
-
-	return $exclusions;
-}
-add_filter( 'registered-users-only_exclusions', 'ea_disable_registered_users_only' );
