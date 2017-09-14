@@ -30,15 +30,7 @@ require_once( EA_DIR . '/inc/dev-tools.php'            ); // Developer tools
 require_once( EA_DIR . '/inc/general.php'              ); // General
 require_once( EA_DIR . '/inc/wordpress-cleanup.php'    ); // Misc WP cleanup
 require_once( EA_DIR . '/inc/kill-trackbacks.php'      ); // Kill trackbacks
+require_once( EA_DIR . '/inc/custom-fields.php'        ); // Custom Fields via Carbon Fields Framework
 require_once( EA_DIR . '/inc/custom-fields-helper.php' ); // Custom fields helper
 //require_once( EA_DIR . '/inc/cpt-testimonial.php'      ); // CPT functionality
 //require_once( EA_DIR . '/inc/widget.php'               ); // Widget template
-
-/**
- * Load Custom Fields
- *
- */
-function ea_load_custom_fields() {
-	require_once( EA_DIR . '/inc/custom-fields.php' );
-}
-add_action( 'carbon_register_fields', 'ea_load_custom_fields' );
