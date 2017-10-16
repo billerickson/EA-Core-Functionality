@@ -1,13 +1,15 @@
 /**
  * The external dependencies.
  */
+import $ from 'jquery';
 import { take, call, put, fork, select } from 'redux-saga/effects';
-import { isEmpty, isNull, mapValues, defaultTo } from 'lodash';
+import { isEmpty, isNull, mapValues, defaultTo, last } from 'lodash';
 
 /**
  * The internal dependencies.
  */
 import { ready } from 'lib/actions';
+import { getSelectOptionLevel, getSelectOptionAncestors } from 'lib/helpers';
 import { createSelectboxChannel, createCheckableChannel, createSubmitChannel, createTextChangeChannel } from 'lib/events';
 
 import { getContainersByType } from 'containers/selectors';
@@ -32,7 +34,14 @@ function* syncStore(containers, meta) {
  * @return {void}
  */
 export function* workerSyncPostTemplate(containers) {
-	const channel = yield call(createSelectboxChannel, 'select#page_template');
+	const selector = 'select#page_template';
+	if ($(selector).length === 0) {
+		yield call(syncStore, containers, {
+			post_template: 'default',
+		});
+	}
+
+	const channel = yield call(createSelectboxChannel, selector);
 
 	while (true) {
 		const { value } = yield take(channel);
@@ -44,28 +53,22 @@ export function* workerSyncPostTemplate(containers) {
 }
 
 /**
- * Keep in sync the `post_parent_id` & `post_level` properties.
+ * Keep in sync the `post_parent_id`, `post_ancestors` & `post_level` properties.
  *
  * @param  {Object} containers
  * @return {void}
  */
-export function* workerSyncPostParentId(containers) {
+export function* workerSyncPostAncestors(containers) {
 	const channel = yield call(createSelectboxChannel, 'select#parent_id');
 
 	while (true) {
-		const { value, option } = yield take(channel);
-		const parentId = defaultTo(parseInt(value, 10), 0);
-		let level = 1;
-
-		if (option.className) {
-			const matches = option.className.match(/^level-(\d+)/);
-
-			if (matches) {
-				level = parseInt(matches[1], 10) + 2;
-			}
-		}
+		const { option } = yield take(channel);
+		const ancestors = getSelectOptionAncestors(option);
+		const parentId = isEmpty(ancestors) ? 0 : last(ancestors);
+		const level = getSelectOptionLevel(option) + 1; // +1 since the option is for the parent, not the current post
 
 		yield call(syncStore, containers, {
+			post_ancestors: ancestors,
 			post_parent_id: parentId,
 			post_level: level,
 		});
@@ -183,7 +186,7 @@ export default function* foreman() {
 
 	// Start the workers.
 	yield fork(workerSyncPostTemplate, containers);
-	yield fork(workerSyncPostParentId, containers);
+	yield fork(workerSyncPostAncestors, containers);
 	yield fork(workerSyncPostFormat, containers);
 	yield fork(setupSyncTerms, containers, 'taxonomy-', workerSyncHierarchicalTerms);
 	yield fork(setupSyncTerms, containers, 'tagsdiv-', workerSyncNonHierarchicalTerms);

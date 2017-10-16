@@ -4,6 +4,7 @@ namespace Carbon_Fields\Helper;
 
 use Carbon_Fields\Datastore\Datastore;
 use Carbon_Fields\Exception\Incorrect_Syntax_Exception;
+use WP_Query;
 
 /**
  * Helper functions and main initialization class.
@@ -11,22 +12,32 @@ use Carbon_Fields\Exception\Incorrect_Syntax_Exception;
 class Helper {
 
 	/**
-	 * Get a value formatted for end-users
+	 * Get a field from a specific container type or id
+	 *
+	 * @param  string  $container_type Container type to search in. Optional if $container_id is supplied
+	 * @param  string  $container_id   Container id to search in. Optional if $container_type is supplied
+	 * @param  string  $field_name     Field name to search for
+	 * @return boolean
+	 */
+	public static function get_field( $container_type, $container_id, $field_name ) {
+		$repository = \Carbon_Fields\Carbon_Fields::resolve( 'container_repository' );
+		if ( $container_id ) {
+			return $repository->get_field_in_container( $field_name, $container_id );
+		}
+		return $repository->get_field_in_containers( $field_name, $container_type );
+	}
+
+	/**
+	 * Get a clone of a field with a value loaded
 	 *
 	 * @param  int    $object_id      Object id to get value for (e.g. post_id, term_id etc.)
-	 * @param  string $container_type Container type to search in
-	 * @param  string $container_id
-	 * @param  string $field_name     Field name
+	 * @param  string $container_type Container type to search in. Optional if $container_id is supplied
+	 * @param  string $container_id   Container id to search in. Optional if $container_type is supplied
+	 * @param  string $field_name     Field name to search for
 	 * @return mixed
 	 */
 	public static function get_field_clone( $object_id, $container_type, $container_id, $field_name ) {
-		$repository = \Carbon_Fields\Carbon_Fields::resolve( 'container_repository' );
-		$field = null;
-		if ( $container_id ) {
-			$field = $repository->get_field_in_container( $field_name, $container_id );
-		} else {
-			$field = $repository->get_field_in_containers( $field_name, $container_type );
-		}
+		$field = static::get_field( $container_type, $container_id, $field_name );
 
 		if ( ! $field ) {
 			return null;
@@ -374,5 +385,147 @@ class Helper {
 	 */
 	public static function is_valid_entity_id( $id ) {
 		return ! empty( $id ) && preg_match( '/\A[a-z0-9_\-]+\z/', $id );
+	}
+
+	/**
+	 * Return a partial regex pettern matching allowed field name characters
+	 *
+	 * @return string
+	 */
+	public static function get_field_name_characters_pattern() {
+		return 'a-z0-9_\-';
+	}
+
+	/**
+	 * Get an attachment ID given a file URL
+	 * Modified version of https://wpscholar.com/blog/get-attachment-id-from-wp-image-url/
+	 *
+	 * @param  string  $url
+	 * @return integet
+	 */
+	function get_attachment_id( $url ) {
+		$dir = wp_upload_dir();
+		$filename = basename( $url );
+
+		if ( strpos( $url, $dir['baseurl'] . '/' ) === false ) {
+			return 0;
+		}
+
+		$query_args = array(
+			'post_type'   => 'attachment',
+			'post_status' => 'inherit',
+			'fields'      => 'ids',
+			'meta_query'  => array(
+				array(
+					'value'   => $filename,
+					'compare' => 'LIKE',
+					'key'     => '_wp_attachment_metadata',
+				),
+			)
+		);
+		$query = new WP_Query( $query_args );
+
+		if ( $query->have_posts() ) {
+			foreach ( $query->posts as $post_id ) {
+				$meta = wp_get_attachment_metadata( $post_id );
+				$original_file = basename( $meta['file'] );
+				$cropped_image_files = wp_list_pluck( $meta['sizes'], 'file' );
+
+				if ( $original_file === $filename || in_array( $filename, $cropped_image_files ) ) {
+					return intval( $post_id );
+				}
+			}
+		}
+
+		return 0;
+	}
+
+	/**
+	 * Returns attachment metadata from an ID.
+	 *
+	 * @param  string  $id
+	 * @param  string  $type Value Type. Can be either id or url
+	 * @return boolean
+	 */
+	public static function get_attachment_metadata( $id, $type ) {
+		$attachment_meta = array(
+			'thumb_url'         => '',
+			'default_thumb_url' => '',
+			'file_ext'          => '',
+			'file_type'         => '',
+			'file_name'         => '',
+			'file_url'          => '',
+			'edit_nonce'        => '',
+			'title'             => '',
+			'caption'           => '',
+			'description'       => '',
+			'alt'               => '',
+			'date'              => '',
+			'filesize'          => '',
+			'width'             => '',
+			'height'            => '',
+		);
+
+		// when value_type is set to "url" the $id will hold the url, not the id
+		if ( $type === 'url' ) {
+			$attachment_id = static::get_attachment_id( $id );
+
+			if ( $attachment_id === 0 ) {
+				$attachment_meta['thumb_url'] = $id;
+				$attachment_meta['default_thumb_url'] = $id;
+				$attachment_meta['file_url'] = $id;
+				return $attachment_meta;
+			}
+
+			$id = $attachment_id;
+		}
+
+		$attachment = get_post( $id );
+
+		if ( ! $attachment ) {
+			return $attachment_meta;
+		}
+
+		$attached_file                = get_attached_file( $attachment->ID );
+		$meta                         = wp_get_attachment_metadata( $attachment->ID );
+		list( $src, $width, $height ) = wp_get_attachment_image_src( $attachment->ID, 'full' );
+
+		$attachment_meta['edit_nonce']  = wp_create_nonce( 'update-post_' . $id );
+		$attachment_meta['title']       = get_the_title( $id );
+		$attachment_meta['caption']     = get_post_field( 'post_excerpt', $id );
+		$attachment_meta['description'] = get_post_field( 'post_content', $id );
+		$attachment_meta['alt']         = get_post_meta( $id, '_wp_attachment_image_alt', true );
+		$attachment_meta['date']        = mysql2date( __( 'F j, Y' ), $attachment->post_date );
+		$attachment_meta['filesize']    = size_format( filesize( $attached_file ) );
+		$attachment_meta['width']       = $width;
+		$attachment_meta['height']      = $height;
+
+		$attachment_meta['file_url']  = is_numeric( $id ) ? wp_get_attachment_url( $id ) : $id;
+		$attachment_meta['file_name'] = basename( $attachment_meta['file_url'] );
+		$attachment_meta['filetype']  = wp_check_filetype( $attachment_meta['file_url'] );
+
+		$attachment_meta['file_ext']  = $attachment_meta['filetype']['ext']; // png, mp3, etc..
+		$attachment_meta['file_type'] = preg_replace( '~\/.+$~', '', $attachment_meta['filetype']['type'] ); // image, video, etc..
+
+		if ( $attachment_meta['file_type'] === 'audio' ) {
+			$attachment_meta['artist'] = $meta['artist'];
+			$attachment_meta['album']  = $meta['album'];
+			$attachment_meta['length'] = $meta['length_formatted'];
+		}
+
+		$attachment_meta['default_thumb_url'] = wp_mime_type_icon( $id );
+
+		if ( $attachment_meta['file_type'] == 'image' ) {
+			$attachment_meta['thumb_url'] = $attachment_meta['file_url'];
+
+			if ( $type == 'id' ) {
+				$thumb_src = wp_get_attachment_image_src( $id, 'thumbnail' );
+				$attachment_meta['thumb_url'] = $thumb_src[0];
+			}
+		} else {
+			$attachment_meta['thumb_url'] = $attachment_meta['default_thumb_url'];
+		}
+
+		return $attachment_meta;
 	}
 }

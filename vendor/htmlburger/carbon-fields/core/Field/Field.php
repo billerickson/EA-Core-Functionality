@@ -163,7 +163,7 @@ class Field implements Datastore_Holder_Interface {
 	 *
 	 * @var array<string>
 	 */
-	protected $allowed_attributes = array( 'max', 'maxLength', 'min', 'pattern', 'placeholder', 'readOnly', 'step', 'type' );
+	protected $allowed_attributes = array();
 
 	/**
 	 * The width of the field.
@@ -254,11 +254,11 @@ class Field implements Datastore_Holder_Interface {
 	/**
 	 * An alias of factory().
 	 *
-	 * @see Field::factory()
+	 * @see    Field::factory()
 	 * @return Field
 	 */
-	public static function make( $type, $name, $label = null ) {
-		return static::factory( $type, $name, $label );
+	public static function make() {
+		return call_user_func_array( array( get_class(), 'factory' ), func_get_args() );
 	}
 
 	/**
@@ -447,7 +447,7 @@ class Field implements Datastore_Holder_Interface {
 	}
 
 	/**
-	 * Load the field value from an input array based on it's name
+	 * Load the field value from an input array based on its name
 	 *
 	 * @param  array $input Array of field names and values.
 	 * @return Field $this
@@ -602,7 +602,7 @@ class Field implements Datastore_Holder_Interface {
 	 * @return Field $this
 	 */
 	public function set_default_value( $default_value ) {
-		$this->default_value = $default_value;
+		$this->default_value = strval($default_value);
 		return $this;
 	}
 
@@ -648,7 +648,8 @@ class Field implements Datastore_Holder_Interface {
 		}
 
 		// symbols ][ are supported in a hidden way - required for widgets to work (WP imposes dashes and square brackets on field names)
-		$regex = '/\A[a-z0-9_\-\[\]]+\z/';
+		$field_name_characters = Helper::get_field_name_characters_pattern();
+		$regex = '/\A[' . $field_name_characters . '\[\]]+\z/';
 		if ( ! preg_match( $regex, $name ) ) {
 			Incorrect_Syntax_Exception::raise( 'Field names  can only contain lowercase alphanumeric characters, dashes and underscores ("' . $name . '" passed).' );
 			return $this;
@@ -705,7 +706,7 @@ class Field implements Datastore_Holder_Interface {
 	 */
 	public function set_label( $label ) {
 		if ( is_null( $label ) ) {
-			// Try to guess field label from it's name
+			// Try to guess field label from its name
 			$label = Helper::normalize_label( $this->get_name() );
 		}
 
@@ -733,7 +734,7 @@ class Field implements Datastore_Holder_Interface {
 	}
 
 	/**
-	 * Set an attribute and it's value
+	 * Set an attribute and its value
 	 *
 	 * @param  string $name
 	 * @param  string $value
@@ -749,11 +750,30 @@ class Field implements Datastore_Holder_Interface {
 		}
 
 		if ( ! $is_data_attribute && ! in_array( $name, $this->allowed_attributes ) ) {
-			Incorrect_Syntax_Exception::raise( 'Only the following attributes are allowed: ' . implode( ', ', $this->allowed_attributes ) . ' and data-*.' );
+			Incorrect_Syntax_Exception::raise( 'Only the following attributes are allowed: ' . implode( ', ', array_merge( $this->allowed_attributes, array( 'data-*' ) ) ) );
 			return $this;
 		}
 
 		$this->attributes[ $name ] = $value;
+		return $this;
+	}
+
+	/**
+	 * Set a key=>value array of attributes
+	 *
+	 * @param  array $attributes
+	 * @return Field $this
+	 */
+	public function set_attributes( $attributes ) {
+		if ( ! is_array( $attributes ) ) {
+			Incorrect_Syntax_Exception::raise( 'An array must be passed for the $attributes parameter of Field::set_attributes().' );
+			return $this;
+		}
+
+		foreach ( $attributes as $name => $value ) {
+			$this->set_attribute( $name, $value );
+		}
+
 		return $this;
 	}
 

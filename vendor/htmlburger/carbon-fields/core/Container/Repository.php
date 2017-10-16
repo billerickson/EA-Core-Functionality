@@ -36,12 +36,26 @@ class Repository {
 	protected $containers = array();
 
 	/**
+	 * Container id prefix
+	 *
+	 * @var string
+	 */
+	protected $container_id_prefix = 'carbon_fields_container_';
+
+	/**
+	 * Container id prefix
+	 *
+	 * @var string
+	 */
+	protected $widget_id_wildcard_suffix = '-__i__';
+
+	/**
 	 * Register a container with the repository
 	 *
 	 * @return array
 	 */
 	public function register_container( Container $container ) {
-		$this->register_unique_container_id( $container->id );
+		$this->register_unique_container_id( $container->get_id() );
 		$this->containers[] = $container;
 		$this->pending_containers[] = $container;
 	}
@@ -167,10 +181,24 @@ class Repository {
 	public function get_unique_container_id( $title ) {
 		$id = remove_accents( $title );
 		$id = strtolower( $id );
-		$id = preg_replace( '~[\-\s]+~', '_', $id );
-		$id = preg_replace( '~[^\w\_]+~', '', $id );
-		$id = preg_replace( '~_{2,}~', '_', $id );
-		$id = 'carbon_fields_container_' . $id;
+
+		$id_prefix = $this->container_id_prefix;
+		if ( substr( $id, 0, strlen( $id_prefix ) ) === $id_prefix ) {
+			$id_prefix = '';
+		}
+
+		$wids = $this->widget_id_wildcard_suffix;
+		$id_suffix = '';
+		if ( substr( $id, -strlen( $wids ) ) === $wids ) {
+			$id_suffix = $wids;
+			$id = substr( $id, 0, -strlen( $wids ) );
+		}
+		
+		$id = preg_replace( '~[\s]+~', '_', $id );
+		$id = preg_replace( '~[^\w\-\_]+~', '', $id );
+
+		$id = $id_prefix . $id . $id_suffix;
+
 		$base = $id;
 		$suffix = 0;
 

@@ -196,7 +196,7 @@ class Post_Meta_Container extends Container {
 
 		foreach ( $this->post_types as $post_type ) {
 			add_meta_box(
-				$this->id,
+				$this->get_id(),
 				$this->title,
 				array( $this, 'render' ),
 				$post_type,
@@ -204,7 +204,8 @@ class Post_Meta_Container extends Container {
 				$this->settings['meta_box_priority']
 			);
 
-			add_filter( "postbox_classes_{$post_type}_{$this->id}", array( $this, 'add_postbox_classes' ) );
+			$container_id = $this->get_id();
+			add_filter( "postbox_classes_{$post_type}_{$container_id}", array( $this, 'add_postbox_classes' ) );
 		}
 	}
 
@@ -247,14 +248,14 @@ class Post_Meta_Container extends Container {
 	 */
 	public function get_post_type_visibility() {
 		$all_post_types = get_post_types();
-		$filtered_collection = $this->condition_collection->filter( array( 'post_type' ) );
+		$evaluated_collection = $this->condition_collection->evaluate( array( 'post_type' ), true, array(), true );
 
 		$shown_on = array();
 		foreach ( $all_post_types as $post_type ) {
 			$environment = array(
 				'post_type' => $post_type,
 			);
-			if ( $filtered_collection->is_fulfilled( $environment ) ) {
+			if ( $evaluated_collection->is_fulfilled( $environment ) ) {
 				$shown_on[] = $post_type;
 			}
 		}
@@ -266,7 +267,7 @@ class Post_Meta_Container extends Container {
 	 */
 
 	/**
-	 * Show the container only on particular page referenced by it's path.
+	 * Show the container only on particular page referenced by its path.
 	 *
 	 * @deprecated
 	 * @param int|string $page page ID or page path
