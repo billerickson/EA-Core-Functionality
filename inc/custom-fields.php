@@ -27,5 +27,10 @@ add_action( 'after_setup_theme', 'ea_load_carbon_fields' );
  */
 function ea_register_custom_fields() {
 
+	Container::make( 'post_meta', 'Page Options' )
+		->where( 'post_type', '=', 'page' )
+		->add_fields( array(
+			Field::make( 'text', 'ea_test', 'Test' )
+		));
 }
 add_action( 'carbon_fields_register_fields', 'ea_register_custom_fields' );
