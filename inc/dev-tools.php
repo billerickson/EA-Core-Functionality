@@ -105,7 +105,7 @@ function ea_is_developer() {
  */
 function ea_is_dev_site() {
 
-	$dev_strings = array( 'wpdev.io', 'master-wp.com', 'localdev', 'staging', 'localhost', 'dev.', '.dev', 'gibraltar', 'wpengine' );
+	$dev_strings = array( 'wpdev.io', 'master-wp.com', 'localdev', 'staging', 'localhost', 'dev.', '.dev', 'gibraltar', 'wpengine', '.local' );
 	$is_dev_site = false;
 	foreach( $dev_strings as $string )
 		if( strpos( home_url(), $string ) )
