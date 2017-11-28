@@ -82,3 +82,23 @@ function ea_author_links_on_cf_plugin( $links, $file ) {
     return $links;
 }
 add_filter( 'plugin_row_meta', 'ea_author_links_on_cf_plugin', 10, 2 );
+
+
+/**
+  * Exclude No-index content from search
+  *
+  */
+function ea_exclude_noindex_from_search( $query ) {
+
+	if( $query->is_main_query() && $query->is_search() && ! is_admin() ) {
+
+		$meta_query = empty( $query->query_vars['meta_query'] ) ? array() : $query->query_vars['meta_query'];
+		$meta_query[] = array(
+			'key' => '_yoast_wpseo_meta-robots-noindex',
+			'compare' => 'NOT EXISTS',
+		);
+
+		$query->set( 'meta_query', $meta_query );
+	}
+}
+add_action( 'pre_get_posts', 'ea_exclude_noindex_from_search' );
