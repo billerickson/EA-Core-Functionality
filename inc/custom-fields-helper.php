@@ -109,3 +109,11 @@ function ea_remove_editor() {
 
 }
 //add_action( 'admin_head', 'ea_remove_editor' );
+
+/**
+ * Metabox Header Template
+ *
+ */
+function ea_metabox_header_template( $key = '' ) {
+	return '<% if (' . $key . ') { %><%- ' . $key . ' %><% } %>';
+}
