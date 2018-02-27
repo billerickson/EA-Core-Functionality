@@ -23,12 +23,8 @@
 // Plugin directory
 define( 'EA_DIR' , plugin_dir_path( __FILE__ ) );
 
-// Developer Tools, can be removed in Production
-require_once( EA_DIR . '/inc/dev-tools.php'            ); // Developer tools
-
-// Site Functionality
-require_once( EA_DIR . '/inc/general.php'              ); // General
-require_once( EA_DIR . '/inc/wordpress-cleanup.php'    ); // Misc WP cleanup
-require_once( EA_DIR . '/inc/kill-trackbacks.php'      ); // Kill trackbacks
-require_once( EA_DIR . '/inc/custom-fields.php'        ); // Custom Fields via Carbon Fields Framework
-require_once( EA_DIR . '/inc/custom-fields-helper.php' ); // Custom fields helper
+require_once( EA_DIR . '/inc/general.php' );
+require_once( EA_DIR . '/inc/wordpress-cleanup.php' );
+require_once( EA_DIR . '/inc/kill-trackbacks.php' );
+require_once( EA_DIR . '/inc/custom-fields.php' );
+require_once( EA_DIR . '/inc/custom-fields-helper.php' );

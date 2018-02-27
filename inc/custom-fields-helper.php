@@ -93,24 +93,6 @@ function ea_cf( $key = '', $id = '', $args = array() ) {
 }
 
 /**
- * Remove Editor
- *
- */
-function ea_remove_editor() {
-
-    $screen = get_current_screen();
-    if( 'page' !== $screen->id || ! isset( $_GET['post']) )
-        return;
-
-    if( $_GET['post'] == get_option( 'page_on_front' ) ) {
-        remove_post_type_support( 'page', 'editor' );
-        remove_meta_box( 'PageOptions', 'page', 'normal' );
-    }
-
-}
-//add_action( 'admin_head', 'ea_remove_editor' );
-
-/**
  * Metabox Header Template
  *
  */
