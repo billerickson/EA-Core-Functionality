@@ -32,4 +32,3 @@ require_once( EA_DIR . '/inc/wordpress-cleanup.php'    ); // Misc WP cleanup
 require_once( EA_DIR . '/inc/kill-trackbacks.php'      ); // Kill trackbacks
 require_once( EA_DIR . '/inc/custom-fields.php'        ); // Custom Fields via Carbon Fields Framework
 require_once( EA_DIR . '/inc/custom-fields-helper.php' ); // Custom fields helper
-//require_once( EA_DIR . '/inc/cpt-testimonial.php'      ); // CPT functionality
