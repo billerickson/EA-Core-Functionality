@@ -96,8 +96,8 @@ function ea_cf( $key = '', $id = '', $args = array() ) {
  * Metabox Header Template
  *
  */
-function ea_metabox_header_template( $key = '' ) {
-	return '<% if (' . $key . ') { %><%- ' . $key . ' %><% } %>';
+function ea_metabox_header_template( $key = '', $title = '' ) {
+	return $title . '<% if (' . $key . ') { %>: <%- ' . $key . ' %><% } %>';
 }
 
 /**
