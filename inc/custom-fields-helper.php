@@ -99,3 +99,39 @@ function ea_cf( $key = '', $id = '', $args = array() ) {
 function ea_metabox_header_template( $key = '' ) {
 	return '<% if (' . $key . ') { %><%- ' . $key . ' %><% } %>';
 }
+
+/**
+ * Theme Icons
+ *
+ */
+function ea_get_theme_icons() {
+	$icons = get_option( 'ea_theme_icons' );
+	$version = get_option( 'ea_theme_icons_version' );
+	if( empty( $icons ) || ( defined( 'THEME_VERSION' ) && version_compare( THEME_VERSION, $version ) ) ) {
+		$icons = scandir( get_stylesheet_directory() . '/assets/icons/' );
+		$icons = array_diff( $icons, array( '..', '.' ) );
+		$icons = array_values( $icons );
+		if( empty( $icons ) )
+			return $icons;
+		// remove the .svg
+		foreach( $icons as $i => $icon ) {
+			$icons[ $i ] = substr( $icon, 0, -4 );
+		}
+		update_option( 'ea_theme_icons', $icons );
+		if( defined( 'THEME_VERSION' ) )
+			update_option( 'ea_theme_icons_version', THEME_VERSION );
+	}
+	return $icons;
+}
+
+/**
+ * Metabox Icon Callback
+ *
+ */
+function ea_metabox_icon_callback() {
+	$icons = ea_get_theme_icons();
+	$output = array( '' => '(None)' );
+	foreach( $icons as $icon )
+		$output[ $icon ] = $icon;
+	return $output;
+}
