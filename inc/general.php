@@ -60,6 +60,20 @@ function ea_remove_wpseo_notifications() {
 add_action( 'init', 'ea_remove_wpseo_notifications' );
 
 /**
+ * WPForms, default large field size
+ *
+ */
+function ea_wpforms_default_large_field_size( $field ) {
+
+        if ( empty( $field['size'] ) ) {
+            $field['size'] = 'large';
+        }
+
+        return $field;
+    }
+add_filter( 'wpforms_field_new_default', 'ea_wpforms_default_large_field_size' );
+
+/**
  * Gravity Forms Domain
  *
  * Adds a notice at the end of admin email notifications
