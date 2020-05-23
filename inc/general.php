@@ -12,6 +12,7 @@
  * Dont Update the Plugin
  * If there is a plugin in the repo with the same name, this prevents WP from prompting an update.
  *
+ * @since  1.2.1 Fix incorrect key when removing from $plugins array
  * @since  1.0.0
  * @author Jon Brown
  * @param  array $r Existing request arguments

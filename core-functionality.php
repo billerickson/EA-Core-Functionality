@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Core Functionality
  * Description: This contains all your site's core functionality so that it is theme independent. <strong>It should always be activated</strong>.
- * Version:     1.2.0
+ * Version:     1.2.1
  * Author:      Bill Erickson & Jared Atchison
  *
  * This program is free software; you can redistribute it and/or modify it under
