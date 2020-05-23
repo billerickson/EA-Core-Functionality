@@ -22,7 +22,7 @@ function ea_dont_update_core_func_plugin( $r, $url ) {
   if ( 0 !== strpos( $url, 'https://api.wordpress.org/plugins/update-check/1.1/' ) )
     return $r; // Not a plugin update request. Bail immediately.
     $plugins = json_decode( $r['body']['plugins'], true );
-    unset( $plugins['plugins'][plugin_basename( __FILE__ )] );
+    unset( $plugins['plugins'][plugin_basename( EA_DIR . '/core-functionality.php' )] );
     $r['body']['plugins'] = json_encode( $plugins );
     return $r;
  }
